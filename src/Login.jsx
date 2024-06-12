@@ -1,49 +1,49 @@
-import React, { useContext, useState } from "react"
-
-import { AuthContext } from "./context"
-import { getToken } from "./api"
-import CreateNewUser from "./CreateNewUser"
-
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "./context";
+import { getToken } from "./api";
+import './App.css';
 
 function Login() {
-  const { auth } = useContext(AuthContext)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const { auth } = useContext(AuthContext);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const submit = () => {
-    getToken({ auth, username, password })
-  }
+    getToken({ auth, username, password });
+  };
 
   return (
-    <div className="p-5">
-
+    <div className="login-container">
       <h1>Login</h1>
-      <div>
+      <div className="input-group">
         <div>Username:</div>
         <input
+          type="text"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
         />
       </div>
 
-      <div>
+      <div className="input-group">
         <div>Password:</div>
         <input
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
       </div>
 
-      <div style={{ marginTop: 20 }}>
+      <div className="submit-button">
         <button onClick={() => submit()}>Submit</button>
       </div>
 
       <hr />
-
-      <CreateNewUser />
-
+      <div>
+      <button className="register"><Link to='/CreateNewUser'>Register a new account</Link></button>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Login

@@ -16,7 +16,11 @@ import Header from './Header'
 import Footer from './Footer'
 import Login from './Login'
 import { AuthContext } from './context'
-
+import CreateNewUser from './CreateNewUser'
+import Profile from './Profile'
+import ListingPage from './ListingPage'
+import MessagePage from './MessagePage'
+import GetMessages from './GetMessages'
 
 function Layout() {
   return (
@@ -44,6 +48,26 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />
       },
+      {
+        path: '/CreateNewUser',
+        element: <CreateNewUser />
+      },
+      {
+        path: '/Profile',
+        element: <Profile />
+      },
+      {
+        path: '/ListingPage',
+        element: <ListingPage />
+      },
+      {
+        path: '/MessagePage',
+        element: <MessagePage />
+      },
+      {
+        path: '/GetMessages',
+        element: <GetMessages />
+      }
     ]
   }
 ])

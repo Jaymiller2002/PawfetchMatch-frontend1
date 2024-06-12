@@ -1,58 +1,74 @@
-import { useState } from "react"
-
-import { createUser } from './api'
-
+import React, { useContext, useState } from "react";
+import { createUser } from "./api";
+import { AuthContext } from "./context";
+import { Link } from "react-router-dom";
+import "./App.css"; // Import the CSS file
 
 const CreateNewUser = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const { auth } = useContext(AuthContext);
 
-  const submit = () => {
-    createUser({ username, password, firstName, lastName })
-  }
+  const submit = async () => {
+    try {
+      console.log("SUBMIT: ", auth.accessToken, username, password, firstName, lastName);
+      await createUser({ username, password, firstName, lastName, auth });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div>
+    <div className="new-user-container">
       <h1>Create New User</h1>
-      <div>
-        <div>Username:</div>
+      <div className="input-group">
+        <label htmlFor="new-username">Username:</label>
         <input
-          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+          id="new-username"
           value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </div>
 
-      <div>
-        <div>Password:</div>
+      <div className="input-group">
+        <label htmlFor="new-password">Password:</label>
         <input
-          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          id="new-password"
           value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
 
-      <div>
-        <div>First Name:</div>
+      <div className="input-group">
+        <label htmlFor="new-firstname">First Name:</label>
         <input
-          onChange={(e) => setFirstName(e.target.value)}
+          type="text"
+          id="new-firstname"
           value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="new-lastname">Last Name:</label>
+        <input
+          type="text"
+          id="new-lastname"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
         />
       </div>
 
       <div>
-        <div>Last Name:</div>
-        <input
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
-        />
-      </div>
-
-      <div style={{ marginTop: 20 }}>
-        <button onClick={() => submit()}>Submit</button>
+        <button className="btn-submit" onClick={submit}>Create Account</button>
+        <button className="btn-secondary"><Link to='/login'>Already have an account?</Link></button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreateNewUser
+export default CreateNewUser;

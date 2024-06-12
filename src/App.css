@@ -13,3 +13,210 @@ body {
 #page-content {
   flex-grow: 2;
 }
+
+.header-links {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.header-links a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #333; /* Set the color of the links */
+}
+
+.header-links a:last-child {
+  margin-right: 0; /* Remove margin from the last link */
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-button {
+  text-align: center;
+}
+
+.submit-button button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button button:hover {
+  background-color: #0056b3;
+}
+
+.register {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.register:hover {
+  background-color: #0056b3;
+}
+
+
+.new-user-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-submit {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary a {
+  text-decoration: none;
+  color: white;
+}
+
+.listing-page-container {
+  display: flex;
+  align-items: center;
+  height: 100vh; /* Make the container full height of the viewport */
+}
+
+.listing-info-container,
+.form-container {
+  width: 100%;
+  max-width: 400px; /* Set a max-width for better readability */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+.listing-info-container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button3 {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #007bff; 
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin: 2px;
+  transition-duration: 0.4s;
+  border-radius: 8px;
+}
+
+.button3:hover {
+  background-color: #0056b3; 
+}
+
+.button3 a {
+  color: white;
+  text-decoration: none;
+}

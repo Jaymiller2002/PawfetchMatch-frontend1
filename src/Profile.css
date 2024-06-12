@@ -1,0 +1,42 @@
+/* Profile.css */
+.Profile-Container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.Profile-Image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.Profile-Username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.Profile-Bio {
+    font-size: 18px;
+    color: #666;
+}
+
+.button {
+    background-color: #007bff;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button a {
+    color: white;
+    text-decoration: none;
+}
