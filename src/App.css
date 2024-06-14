@@ -14,28 +14,14 @@ body {
   flex-grow: 2;
 }
 
-.header-links {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
-
-.header-links a {
-  margin-right: 20px;
-  text-decoration: none;
-  color: #333; /* Set the color of the links */
-}
-
-.header-links a:last-child {
-  margin-right: 0; /* Remove margin from the last link */
-}
-
+/* LOGIN CSS */
 .login-container {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-top: 15px;
 }
 
 .login-header {
@@ -98,12 +84,14 @@ body {
 }
 
 
+/* CREATE NEW USER CSS */
 .new-user-container {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-top: 15px;
 }
 
 .create-header {
@@ -194,29 +182,37 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.button3 {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #007bff; 
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  cursor: pointer;
-  padding: 10px 20px;
-  margin: 2px;
-  transition-duration: 0.4s;
-  border-radius: 8px;
+
+/* LOGOUT BUTTON CSS */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
-.button3:hover {
-  background-color: #0056b3; 
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin-left: 25px;
+  margin-bottom: 20px;
 }
 
-.button3 a {
-  color: white;
-  text-decoration: none;
+.search-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #121a22;
+}
+
+.listings-container {
+  width: 100%;
+  max-width: 800px;
 }

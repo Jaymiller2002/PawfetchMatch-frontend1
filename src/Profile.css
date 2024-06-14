@@ -1,42 +1,84 @@
-/* Profile.css */
-.Profile-Container {
+.profile-container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
 }
 
-.Profile-Image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+.profile-header {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.Profile-Username {
-    font-size: 24px;
-    font-weight: bold;
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
     margin-bottom: 10px;
 }
 
-.Profile-Bio {
-    font-size: 18px;
+.profile-username {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile-bio {
+    font-size: 16px;
     color: #666;
 }
 
-.button {
-    background-color: #007bff;
-    margin: 10px;
-    border-radius: 5px;
+.profile-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
 }
 
-.button:hover {
+.profile-form input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.profile-form button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.profile-form button:hover {
     background-color: #0056b3;
 }
 
-.button a {
+.profile-footer {
+    text-align: center;
+}
+
+.message-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.message-button a {
     color: white;
     text-decoration: none;
+}
+
+.message-button:hover {
+    background-color: #0056b3;
 }

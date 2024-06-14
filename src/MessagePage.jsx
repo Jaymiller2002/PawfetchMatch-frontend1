@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { createMessage, updateMessage, deleteMessage } from './api'; // Import the deleteMessage function
+import { createMessage, updateMessage, deleteMessage } from './api';
 import { AuthContext } from './context';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { useNavigate } from 'react-router-dom';
 import GetMessages from './GetMessages';
 import './MessagePage.css';
 
@@ -10,7 +10,7 @@ function MessagePage() {
   const [image, setImage] = useState(null);
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
-  const [updateImage, setUpdateImage] = useState(null); // State for updating image
+  const [updateImage, setUpdateImage] = useState(null);
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -48,63 +48,70 @@ function MessagePage() {
   }, [auth.accessToken, navigate]);
 
   return (
-    <div className='send-message-container'>
-      <h1>Send Message</h1>
-      <div className='form-container'>
-        <div className='form-group'>
-          <label htmlFor="content">Message Content:</label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
+    <div className='message-page-container'>
+      <div className='send-message-container'>
+        <h1>Send Message</h1>
+        <div className='form-container create-message-form'>
+          <div className='form-group'>
+            <label htmlFor="content">Message Content:</label>
+            <textarea
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor="image">Attach Image:</label>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor="receiver">Receiver or their ID: </label>
+            <input
+              type="text"
+              name="receiver"
+              value={receiver}
+              onChange={(e) => setReceiver(e.target.value)}
+            />
+          </div>
+          <button onClick={handleMessageSend}>Send Message</button>
         </div>
-        <div className='form-group'>
-          <label htmlFor="image">Attach Image:</label>
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor="receiver">Receiver or their ID: </label>
-          <input
-            type="text"
-            name="receiver"
-            value={receiver}
-            onChange={(e) => setReceiver(e.target.value)}
-          />
-        </div>
-        <button onClick={handleMessageSend}>Send Message</button>
-        {/* Button to update message */}
-        <div className='form-group'>
-          <label htmlFor="updateContent">Update Content:</label>
-          <textarea
-            id="updateContent"
-            value={updateContent}
-            onChange={(e) => setUpdateContent(e.target.value)}
-            required
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor="updateImage">Update Image:</label>
-          <input
-            type="file"
-            name="updateImage"
-            accept="image/*"
-            onChange={(e) => setUpdateImage(e.target.files[0])}
-          />
-        </div>
-        <button onClick={handleUpdateMessage}>Update Message</button>
-        {/* Button to delete message */}
-        <button onClick={handleDeleteMessage}>Delete Message</button>
       </div>
+
+      <div className='update-message-container'>
+        <h1>Update Message</h1>
+        <div className='form-container update-message-form'>
+          <div className='form-group'>
+            <label htmlFor="updateContent">Update Content:</label>
+            <textarea
+              id="updateContent"
+              value={updateContent}
+              onChange={(e) => setUpdateContent(e.target.value)}
+              required
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor="updateImage">Update Image:</label>
+            <input
+              type="file"
+              name="updateImage"
+              accept="image/*"
+              onChange={(e) => setUpdateImage(e.target.files[0])}
+            />
+          </div>
+          <button onClick={handleUpdateMessage}>Update Message</button>
+        </div>
+      </div>
+
       <div>
         <GetMessages />
       </div>
+      <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
     </div>
   );
 }

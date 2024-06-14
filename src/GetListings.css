@@ -11,13 +11,15 @@
 .card {
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
     margin: 10px;
     padding: 20px;
     width: 300px;
+    text-align: start;
 }
 
 .card img {
     max-width: 100%;
     height: auto;
+    border: 1px solid #ccc;
 }

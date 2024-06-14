@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GetListings from "./GetListings";
+import './App.css';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -9,16 +10,22 @@ function App() {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search listings..."
-        value={searchTerm}
-        onChange={handleSearchChange}
-      />
-      <GetListings searchTerm={searchTerm} />
+    <div className='app-container'>
+      <div className='search-container'>
+        <input
+          type="text"
+          placeholder="Search listings..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className='search-input'
+        />
+      </div>
+      <div className='listings-container'>
+        <GetListings searchTerm={searchTerm} />
+      </div>
     </div>
   );
 }
 
 export default App;
+

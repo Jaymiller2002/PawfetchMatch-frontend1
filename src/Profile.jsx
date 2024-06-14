@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { fetchUser, updateUser, deleteUser } from './api'; // Import updateUser and deleteUser
+import { fetchUser, updateUser, deleteUser } from './api';
 import { AuthContext } from './context';
 import './Profile.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,10 +8,10 @@ function Profile() {
     const [username, setUsername] = useState('');
     const [bio, setBio] = useState('');
     const [image, setImage] = useState(undefined);
-    const [newFirstName, setNewFirstName] = useState(''); // State for user's input
-    const [newLastName, setNewLastName] = useState(''); // State for user's input
-    const [newBio, setNewBio] = useState(''); // State for user's input
-    const [newImage, setNewImage] = useState(null); // State for user's input
+    const [newFirstName, setNewFirstName] = useState('');
+    const [newLastName, setNewLastName] = useState('');
+    const [newBio, setNewBio] = useState('');
+    const [newImage, setNewImage] = useState(null);
     const { auth } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -19,11 +19,10 @@ function Profile() {
         if (auth.accessToken) {
             fetchUserData();
         }
-    }, [auth.accessToken]); // Only fetch data when accessToken changes
+    }, [auth.accessToken]); 
 
     useEffect(() => {
         if (!auth.accessToken) {
-            // If accessToken is not available, navigate to the login page
             navigate('/login');
         }
     }, [auth.accessToken, navigate]);
@@ -43,21 +42,18 @@ function Profile() {
     };
 
     const handleUpdateProfile = async () => {
-        // Pass user's input as parameters to updateUser function
         updateUser({
             auth,
-            firstName: newFirstName, // If newFirstName is not empty, use it; otherwise, keep existing firstname 
+            firstName: newFirstName,
             lastName: newLastName,
             bio: newBio,
-            image: newImage ? newImage : image // If newImage is not empty, use it; otherwise, keep the existing image
+            image: newImage ? newImage : image
         });
     }
 
     const handleDeleteProfile = async () => {
-        // Call deleteUser function with auth parameter
         deleteUser({ auth })
             .then(() => {
-                // On successful deletion, navigate to login page
                 navigate('/login');
             })
             .catch(error => {
@@ -66,41 +62,48 @@ function Profile() {
     }
 
     return (
-        <div className="Profile-Container">
-            <img className="Profile-Image" src={`http://127.0.0.1:8000${image}`} alt="User Profile"></img>
-            <h1 className="Profile-Username">{username}</h1>
-            <h2 className="Profile-bio">{bio}</h2>
-            <input 
-                type="text" 
-                placeholder="New First Name" 
-                value={newFirstName} 
-                onChange={(e) => setNewFirstName(e.target.value)} 
-            />
-            <input 
-                type="text" 
-                placeholder="New Last Name" 
-                value={newLastName} 
-                onChange={(e) => setNewLastName(e.target.value)} 
-            />
-            <input 
-                type="text" 
-                placeholder="New Bio" 
-                value={newBio} 
-                onChange={(e) => setNewBio(e.target.value)} 
-            />
-            <input 
-                type="file" 
-                accept="image/*" 
-                onChange={(e) => setNewImage(e.target.files[0])} 
-            />
-            <button className='button' onClick={handleUpdateProfile}>Update Profile</button>
-            <button className='button' onClick={handleDeleteProfile}>Delete Profile</button>
-            <button className='button'><Link to='/MessagePage'>Messages</Link></button>
+        <div className="profile-container">
+            <div className="profile-header">
+                <h1 className="profile-username">{username}</h1>
+                <img className="profile-image" src={`http://127.0.0.1:8000${image}`} alt="User Profile" />
+                <p className="profile-bio">{bio}</p>
+            </div>
+            <div className="profile-form">
+                <input 
+                    type="text" 
+                    placeholder="New First Name" 
+                    value={newFirstName} 
+                    onChange={(e) => setNewFirstName(e.target.value)} 
+                />
+                <input 
+                    type="text" 
+                    placeholder="New Last Name" 
+                    value={newLastName} 
+                    onChange={(e) => setNewLastName(e.target.value)} 
+                />
+                <input 
+                    type="text" 
+                    placeholder="New Bio" 
+                    value={newBio} 
+                    onChange={(e) => setNewBio(e.target.value)} 
+                />
+                <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={(e) => setNewImage(e.target.files[0])} 
+                />
+                <button className='update-button' onClick={handleUpdateProfile}>Update Profile</button>
+                <button className='delete-button' onClick={handleDeleteProfile}>Delete Profile</button>
+            </div>
+            <div className="profile-footer">
+                <button className='message-button'><Link to='/MessagePage'>Messages</Link></button>
+            </div>
         </div>
     );
 }
 
 export default Profile;
+
 
 
 
