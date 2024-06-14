@@ -8,13 +8,9 @@ const LogoutButton = () => {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext); // Assuming useAuth provides access to auth context or hook
 
-  useEffect(() => {
-    
-  }, [auth.accessToken]); // Run once when component mounts
-
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout({ auth });
       // After successful logout, navigate back to the home page
       navigate('/');
     } catch (error) {

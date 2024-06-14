@@ -17,7 +17,7 @@ function GetMessages() {
     if (auth.accessToken) {
         try {
             const response = await getMessages({ auth });
-            console.log("HEYYYYY: ", response)
+            console.log("Got Messages: ", response)
             setMessages(response.data); // Assuming response.data contains the messages
         } catch (error) {
             console.error('Error fetching messages:', error);

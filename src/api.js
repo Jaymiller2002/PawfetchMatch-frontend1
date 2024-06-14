@@ -282,12 +282,17 @@ export const getMessages = ({ sender, receiver, content, image, auth}) => {
 }
 
 // Logout API
-export const logout = async () => {
-  try {
-    await axios.post(`${baseUrl}/logout/`);
-    // After successful logout, you may want to redirect the user to the login page or perform any other actions.
-  } catch (error) {
-    console.error('Error logging out:', error);
-    throw error; // You can choose to handle the error accordingly in the component where this function is used.
-  }
-};
+export const logout = ({ auth }) => {
+  return axios({
+    method: 'post',
+    url: `${baseUrl}/logout/`,
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`
+    },
+  }).then(response => {
+    console.log("LOGGED OUT: ", response)
+    return response
+  }).catch(error => {
+    console.log("ERROR LOGGING OUT: ", error)
+  })
+}

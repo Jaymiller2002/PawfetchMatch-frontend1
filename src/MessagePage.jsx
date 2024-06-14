@@ -11,6 +11,21 @@ function MessagePage() {
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
+  const [users] = useState([
+    { id: 1, name: 'User 1' },
+    { id: 2, name: 'User 2' },
+    { id: 3, name: 'User 3' },
+    { id: 4, name: 'User 4' },
+    { id: 5, name: 'User 5' },
+    { id: 6, name: 'User 6' },
+    { id: 7, name: 'Jay Miller' },
+    { id: 8, name: 'User 8' },
+    { id: 9, name: 'User 9' },
+    { id: 10, name: 'User 10' },
+    { id: 11, name: 'Reece' },
+    { id: 12, name: 'User 12' },
+    { id: 13, name: 'User 13' },
+  ]);
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -71,13 +86,19 @@ function MessagePage() {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor="receiver">Receiver or their ID: </label>
-            <input
-              type="text"
-              name="receiver"
+            <label htmlFor="receiver"></label>
+            <select
+              id="receiver"
               value={receiver}
               onChange={(e) => setReceiver(e.target.value)}
-            />
+            >
+              <option value="">Select Receiver</option>
+              {users.map(user => (
+                <option key={user.id} value={user.id}>
+                  {user.name} ({user.id})
+                </option>
+              ))}
+            </select>
           </div>
           <button onClick={handleMessageSend}>Send Message</button>
         </div>
@@ -117,5 +138,6 @@ function MessagePage() {
 }
 
 export default MessagePage;
+
 
 
