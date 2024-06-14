@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { createUser } from "./api";
 import { AuthContext } from "./context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./App.css"; // Import the CSS file
 
 const CreateNewUser = () => {
@@ -9,12 +9,16 @@ const CreateNewUser = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [bio, setBio] = useState(""); // New state variable for bio
+  const [image, setImage] = useState(""); // New state variable for image
   const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const submit = async () => {
     try {
-      console.log("SUBMIT: ", auth.accessToken, username, password, firstName, lastName);
-      await createUser({ username, password, firstName, lastName, auth });
+      console.log("SUBMIT: ", auth.accessToken, username, password, firstName, lastName, bio, image);
+      await createUser({ username, password, firstName, lastName, bio, image, auth }); // Pass bio and image to createUser function
+      navigate('/Login')
     } catch (error) {
       console.log(error);
     }
@@ -60,6 +64,26 @@ const CreateNewUser = () => {
           id="new-lastname"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+        />
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="new-bio">Bio:</label> {/* Add input field for bio */}
+        <input
+          type="text"
+          id="new-bio"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+        />
+      </div>
+
+      <div className="input-group">
+        <label htmlFor="new-image">Change Image:</label>
+        <input
+          type="file"
+          id="new-image"
+          accept="image/*"
+          onChange={e => setImage(e.target.files[0])}
         />
       </div>
 

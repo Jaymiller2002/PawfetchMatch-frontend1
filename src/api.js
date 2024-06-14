@@ -34,7 +34,8 @@ export const fetchUser = ({ auth }) => {
   })
 }
 
-export const createUser = ({ username, password, firstName, lastName, auth }) => {
+// Create User API
+export const createUser = ({ username, password, firstName, lastName, bio, image, auth }) => {
   axios({
     method: 'post',
     url: `${baseUrl}/create-user/`, 
@@ -42,7 +43,9 @@ export const createUser = ({ username, password, firstName, lastName, auth }) =>
       username: username,
       password: password,
       first_name: firstName,
-      last_name: lastName
+      last_name: lastName,
+      bio: bio,
+      image: image,
     },
   }).then(response => {
     console.log('CREATE USER: ', response)
@@ -52,6 +55,55 @@ export const createUser = ({ username, password, firstName, lastName, auth }) =>
   })
 }
 
+// Update User API
+export const updateUser = ({  
+  firstName, 
+  lastName, 
+  bio, 
+  image, 
+  auth 
+}) => {
+  const formData = new FormData();
+  console.log('FORM DATA FOR UPDATE USER: ', formData)
+  formData.append('first_name', firstName);
+  formData.append('last_name', lastName);
+  formData.append('bio', bio);
+  formData.append('image', image);
+
+  return axios({
+    method: 'put',
+    url: `${baseUrl}/update-user/`,
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+      'Content-Type': 'multipart/form-data'
+    },
+    data: formData
+  }).then(response => {
+    console.log("UPDATED USER: ", response)
+    return response
+  }).catch(error => {
+    console.log("ERROR UPDATING USER: ", error)
+    throw error; // Rethrow the error to handle it in the calling code
+  })
+}
+
+// Delete User API
+export const deleteUser = ({ auth}) => {
+  return axios({
+    method: 'delete',
+    url: `${baseUrl}/delete-user/`,
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`
+    }
+  }).then(response => {
+    console.log("DELTED USER: ", response)
+    return response
+  }).catch(error => {
+    console.log("ERROR DELETING USER: ", error)
+  })
+}
+
+// Create Listing API
 export const createListing = ({ title, description, price, quantity, image, auth}) => {
   console.log("AUTH TOKEN: ", auth)
   return axios({
@@ -77,28 +129,69 @@ export const createListing = ({ title, description, price, quantity, image, auth
   })
 }
 
-export const getListing = ({ title, description, price, quantity, image, auth}) => {
-  return axios({
-    method: 'get',
-    url: `${baseUrl}/get-listing/`,
-    headers: {
-      Authorization: `Bearer ${auth.accessToken}`
-    },
-    data: {
-      title: title,
-      description: description,
-      price: price,
-      quantity: quantity,
-      image: image
-    },
-  }).then(response => {
-    console.log("GOT LISTINGS: ", response)
-    return response
-  }).catch(error => {
-    console.log("ERROR FETCHING LISTINGS: ", error)
-  })
-}
 
+// Update Listing API
+export const updateListing = ({ title, description, price, quantity, image, auth }) => {
+  const formData = new FormData();
+  console.log('FORM DATA FOR UPDATE LISTING: ', formData)
+  formData.append('title', title);
+  formData.append('description', description);
+  formData.append('price', price);
+  formData.append('quantity', quantity);
+  formData.append('image', image);
+  
+  return axios({
+    method: 'put',
+    url: `${baseUrl}/update-listing/`, // Assuming the endpoint is 'update-listing'
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+      'Content-Type': 'multipart/form-data'
+    },
+    data: formData
+  })
+  .then(response => {
+    console.log("UPDATED LISTING: ", response);
+    return response;
+  })
+  .catch(error => {
+    console.log("ERROR UPDATING LISTING: ", error);
+    throw error;
+  });
+};
+
+// Delete Listing API
+export const deleteListing = ({ auth }) => {
+  return axios({
+    method: 'delete',
+    url: `${baseUrl}/delete-listing/`, // Assuming the endpoint is 'delete-listing'
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+    },
+  })
+  .then(response => {
+    console.log("Listing deleted:", response);
+    return response;
+  })
+  .catch(error => {
+    console.error("Error deleting listing:", error);
+    throw error;
+  });
+};
+
+// Get Listing API
+export const getListing = () => {
+  return axios.get(`${baseUrl}/get-listing/`)
+    .then(response => {
+      console.log("GOT LISTINGS: ", response);
+      return response.data;
+    })
+    .catch(error => {
+      console.log("ERROR FETCHING LISTINGS: ", error);
+      throw error; // Re-throw the error to be handled by the caller
+    });
+};
+
+// Create Message API
 export const createMessage = ({ sender, receiver, content, image, auth}) => {
   return axios({
     method: 'post',
@@ -121,6 +214,52 @@ export const createMessage = ({ sender, receiver, content, image, auth}) => {
   })
 }
 
+// Update Message API
+export const updateMessage = ({ content, image, auth }) => {
+  const formData = new FormData();
+  formData.append('content', content);
+  formData.append('image', image); // Assuming 'image' is a file or blob
+
+  return axios({
+    method: 'put',
+    url: `${baseUrl}/update-message/`, // Assuming the endpoint is 'update-message'
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+      'Content-Type': 'multipart/form-data'
+    },
+    data: formData
+  })
+  .then(response => {
+    console.log("Message updated:", response.data);
+    return response;
+  })
+  .catch(error => {
+    console.error("Error updating message:", error);
+    throw error;
+  });
+};
+
+// Delete Message API
+export const deleteMessage = ({ auth }) => {
+  return axios({
+    method: 'delete',
+    url: `${baseUrl}/delete-message/`, // Assuming the endpoint is 'delete-message'
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+    },
+  })
+  .then(response => {
+    console.log("Message deleted:", response.data);
+    return response;
+  })
+  .catch(error => {
+    console.error("Error deleting message:", error);
+    throw error;
+  });
+};
+
+
+// Get Messages API
 export const getMessages = ({ sender, receiver, content, image, auth}) => {
   return axios({
     method: 'get',
@@ -141,3 +280,14 @@ export const getMessages = ({ sender, receiver, content, image, auth}) => {
     console.log("ERROR GETTING MESSAGES: ", error)
   })
 }
+
+// Logout API
+export const logout = async () => {
+  try {
+    await axios.post(`${baseUrl}/logout/`);
+    // After successful logout, you may want to redirect the user to the login page or perform any other actions.
+  } catch (error) {
+    console.error('Error logging out:', error);
+    throw error; // You can choose to handle the error accordingly in the component where this function is used.
+  }
+};

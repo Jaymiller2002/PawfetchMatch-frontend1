@@ -1,15 +1,24 @@
-// import { Link } from "react-router-dom"
-import GetListings from "./GetListings"
-
+import React, { useState } from 'react';
+import GetListings from "./GetListings";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   return (
     <div>
-      {/* <button className="button3"><Link to='/Login'>Login/Sign-Up</Link></button> */}
-      <GetListings />
+      <input
+        type="text"
+        placeholder="Search listings..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
+      <GetListings searchTerm={searchTerm} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

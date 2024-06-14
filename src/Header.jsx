@@ -1,17 +1,21 @@
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
+import "./Header.css";
 
 function Header() {
   return (
     <div className="header-links">
-      <Link to='/'><i style={{ marginRight: 20, cursor: "pointer", fontSize: 25}} className="fa-solid fa-paw"></i></Link>
-      <Link style={{ marginRight: 20 }} to='/'>Home</Link>
-      <Link style={{ marginRight: 20 }} to='/login'>Login</Link>
-      <Link style={{ marginRight: 20 }}to={'/ListingPage'}>Make Listing</Link>
-      <Link to='/Profile'>Profile</Link>
-      {/* <Link to='/MessagePage'>Message</Link> */}
-      {/* <Link to='/GetMessages'>Get Message</Link> */}
+      <Link to="/" className="header-link">
+        <i className="fa-solid fa-paw"></i>
+      </Link>
+      <Link to="/" className="header-link">Home</Link>
+      <Link to="/login" className="header-link">Login</Link>
+      <Link to="/ListingPage" className="header-link">Make Listing</Link>
+      <Link to="/Profile" className="header-link">Profile</Link>
+      <LogoutButton />
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;

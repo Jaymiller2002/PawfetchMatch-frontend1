@@ -1,23 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getListing } from './api';
-import { AuthContext } from './context';
 import './GetListings.css';
 
-function GetListings() {
+function GetListings({ searchTerm }) {
     const [listings, setListings] = useState([]);
-    const { auth } = useContext(AuthContext);
 
     useEffect(() => {
-        if (auth.accessToken) {
-            fetchListings();
-        }
-    }, [auth.accessToken]); // Only fetch data when accessToken changes
+        fetchListings();
+    }, [searchTerm]); // Re-fetch listings when searchTerm changes
 
     const fetchListings = async () => {
         try {
-            const response = await getListing({ auth });
+            const response = await getListing();
             console.log("GOT LISTINGS: ", response);
-            setListings(response.data);
+            setListings(response.filter(listing => listing.title.toLowerCase().includes(searchTerm.toLowerCase())));
         } catch (error) {
             console.log("ERROR FETCHING LISTINGS: ", error);
         }
@@ -25,7 +21,6 @@ function GetListings() {
 
     return (
         <div className="listing-container">
-            <h2>Listings:</h2>
             <ul className="card-container">
                 {listings.map((listing, index) => (
                     <li className="card" key={index}>
@@ -33,7 +28,7 @@ function GetListings() {
                         <p>Description: {listing.description}</p>
                         <p>Price: {listing.price}</p>
                         <p>Quantity: {listing.quantity}</p>
-                        <img src={`http://127.0.0.1:8000${listing.image}`}></img>
+                        <img src={`http://127.0.0.1:8000${listing.image}`} alt={listing.title} />
                     </li>
                 ))}
             </ul>
@@ -42,3 +37,5 @@ function GetListings() {
 }
 
 export default GetListings;
+
+
