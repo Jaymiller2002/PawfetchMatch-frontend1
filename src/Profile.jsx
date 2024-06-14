@@ -18,6 +18,9 @@ function Profile() {
     useEffect(() => {
         if (auth.accessToken) {
             fetchUserData();
+            // Polling for updates every 10 seconds
+            const interval = setInterval(fetchUserData, 1000);
+            return () => clearInterval(interval);
         }
     }, [auth.accessToken]); 
 
@@ -49,6 +52,7 @@ function Profile() {
             bio: newBio,
             image: newImage ? newImage : image
         });
+        // Optionally, implement some feedback mechanism after the update
     }
 
     const handleDeleteProfile = async () => {
@@ -103,6 +107,7 @@ function Profile() {
 }
 
 export default Profile;
+
 
 
 

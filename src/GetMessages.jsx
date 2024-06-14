@@ -11,6 +11,9 @@ function GetMessages() {
 
   useEffect(() => {
     fetchData();
+    // Polling for updates every 10 seconds
+    const interval = setInterval(fetchData, 1000);
+    return () => clearInterval(interval);
   }, [auth.accessToken]);
 
   const fetchData = async () => {
@@ -47,3 +50,4 @@ function GetMessages() {
 }
 
 export default GetMessages;
+
