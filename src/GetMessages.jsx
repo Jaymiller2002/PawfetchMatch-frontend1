@@ -37,7 +37,7 @@ function GetMessages() {
 
   return (
     <div className='messages-container'>
-      <h2>Messages</h2>
+      <h2>Sent/Received Messages</h2>
       {messages.map(message => (
         <div key={message.id} className="message">
           <div className='message-sender'>Sender: {message.sender}</div>

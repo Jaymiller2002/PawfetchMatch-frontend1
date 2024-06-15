@@ -1,5 +1,6 @@
 .messages-container {
-    margin: 20px;
+    margin: 40px;
+    text-align: center;
   }
   
   .message {
@@ -11,6 +12,7 @@
   
   .message-sender {
     font-weight: bold;
+    margin-top: 10px;
   }
   
   .message-content {

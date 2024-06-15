@@ -81,7 +81,7 @@ function ListingPage() {
         <button onClick={handleUpdateListing}>Update Listing</button>
       </div>
 
-      <div className="delete-listing-button">
+      <div className="delete-listing">
         <button onClick={handleDeleteListing}>Delete Listing</button>
       </div>
     </div>
