@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logout } from './api';
 import { AuthContext } from './context'; // Assuming you have an auth context or hook to get the accessToken
@@ -10,10 +10,11 @@ const LogoutButton = () => {
 
   const handleLogout = async () => {
     try {
-      await logout({ auth });
-      // After successful logout, navigate back to the home page
+      await logout({ auth }); // Wait for the logout function to complete
+      auth.setAccessToken(null);
       navigate('/');
     } catch (error) {
+      console.error('Logout error:', error);
       // Handle logout error, if needed
     }
   };

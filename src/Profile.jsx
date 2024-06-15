@@ -19,7 +19,7 @@ function Profile() {
         if (auth.accessToken) {
             fetchUserData();
             // Polling for updates every 10 seconds
-            const interval = setInterval(fetchUserData, 1000);
+            const interval = setInterval(fetchUserData, 5000);
             return () => clearInterval(interval);
         }
     }, [auth.accessToken]); 

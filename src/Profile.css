@@ -87,3 +87,11 @@
 .message-button:hover {
     background-color: #008000aa;
 }
+
+.profile-form .delete-button {
+    background-color: rgba(255, 0, 0, 0.862);
+}
+
+.profile-form .delete-button:hover {
+    background-color: rgb(146, 0, 0);
+}

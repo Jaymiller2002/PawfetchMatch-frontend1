@@ -290,8 +290,8 @@ export const logout = ({ auth }) => {
       Authorization: `Bearer ${auth.accessToken}`
     },
   }).then(response => {
-    console.log("LOGGED OUT: ", response)
-    return response
+    console.log("LOGGED OUT: ", response.data)
+    return response.data
   }).catch(error => {
     console.log("ERROR LOGGING OUT: ", error)
   })
