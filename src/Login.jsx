@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./context";
 import { getToken } from "./api";
@@ -10,15 +10,20 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const submit = async () => {
+  const submit = () => {
     try {
-      await getToken({ auth, username, password });
-      navigate("/Profile");
+      getToken({ auth, username, password });
     } catch (error) {
       // Handle login error
       console.error("Login failed! Please Try Again: ", error);
     }
   };
+
+  useEffect(() => {
+    if (auth.accessToken) {
+      navigate("/Profile");
+    }
+  }, [auth.accessToken, navigate]);
 
   return (
     <div className="login-container">
@@ -54,4 +59,5 @@ function Login() {
 }
 
 export default Login;
+
 
