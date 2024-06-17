@@ -25,4 +25,32 @@
     margin-right: 20px;
     cursor: pointer;
   }
-  
+  /* Media Queries */
+  @media (max-width: 768px) {
+  .header-links {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .header-link {
+    font-size: 20px;
+    margin: 5px 0;
+  }
+
+  .fa-paw {
+    font-size: 20px;
+    margin-right: 0;
+    margin-top: 10px;
+  }
+}
+
+  @media (max-width: 300px) {
+  .header-link {
+    font-size: 16px;
+  }
+
+  .fa-paw {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+}
