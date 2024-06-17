@@ -12,9 +12,8 @@ function Login() {
 
   const submit = async () => {
     try {
-      getToken({ auth, username, password });
-      // Navigate to '/Profile' after successful login
-      navigate('/Profile');
+      await getToken({ auth, username, password });
+      navigate("/Profile");
     } catch (error) {
       // Handle login error
       console.error("Login failed! Please Try Again: ", error);
