@@ -34,6 +34,28 @@ export const fetchUser = ({ auth }) => {
   })
 }
 
+// Get All Profile's
+export const fetchAllProfiles = ({ auth }) => {
+  return axios({
+    method: 'get',
+    url: `${baseUrl}/profiles/`, // Adjust the endpoint URL to match your API endpoint for fetching all profiles
+    headers: {
+      Authorization: `Bearer ${auth.accessToken}`,
+      'Content-Type': 'application/json', // Adjust the content type if needed
+    }
+  }).then(response => {
+    console.log('ALL PROFILES: ', response.data); // Log the response data
+    return response.data; // Return the response data
+  }).catch(error => {
+    console.log('ERROR: ', error); // Log any errors
+    if (error.response && error.response.status === 401) {
+      auth.setAccessToken(undefined); // Clear access token on 401 Unauthorized error
+    }
+    throw error; // Re-throw the error to handle it further if needed
+  });
+};
+
+
 // Create User API
 export const createUser = ({ username, password, firstName, lastName, bio, image, auth }) => {
   axios({

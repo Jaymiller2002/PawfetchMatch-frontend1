@@ -13,6 +13,7 @@ function Header() {
       <Link to="/login" className="header-link">Login</Link>
       <Link to="/ListingPage" className="header-link">Listing</Link>
       <Link to="/Profile" className="header-link">Profile</Link>
+      <Link to="/AllProfiles" className="header-link">All Profile's</Link>
       <LogoutButton />
     </div>
   );

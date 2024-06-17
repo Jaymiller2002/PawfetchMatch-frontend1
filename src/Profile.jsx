@@ -108,7 +108,7 @@ function Profile() {
                     />
                     <input 
                         type="file" 
-                        accept="image/*" 
+                        accept="image/*"
                         onChange={(e) => setNewImage(e.target.files[0])} 
                     />
                     <button className='update-button' onClick={handleUpdateProfile}>Update Profile</button>

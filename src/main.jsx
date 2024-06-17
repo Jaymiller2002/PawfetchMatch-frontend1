@@ -21,6 +21,7 @@ import Profile from './Profile'
 import ListingPage from './ListingPage'
 import MessagePage from './MessagePage'
 import GetMessages from './GetMessages'
+import AllProfiles from './AllProfiles'
 
 function Layout() {
   return (
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: '/GetMessages',
         element: <GetMessages />
+      },
+      {
+        path: '/AllProfiles',
+        element: <AllProfiles />
       }
     ]
   }
