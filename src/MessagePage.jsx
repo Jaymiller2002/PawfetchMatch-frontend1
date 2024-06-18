@@ -12,22 +12,11 @@ function MessagePage() {
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
   const [users] = useState([
-    { id: 1, name: 'User 1' },
-    { id: 2, name: 'User 2' },
-    { id: 3, name: 'User 3' },
-    { id: 4, name: 'User 4' },
-    { id: 5, name: 'User 5' },
-    { id: 6, name: 'User 6' },
+    // Will have to update with each new user
     { id: 7, name: 'Jay Miller'},
-    { id: 8, name: 'User 8' },
-    { id: 9, name: 'User 9' },
-    { id: 10, name: 'User 10' },
     { id: 11, name: 'Reece' },
-    { id: 12, name: 'User 12' },
-    { id: 13, name: 'User 13' },
     { id: 14, name: 'Vader' },
-    { id: 15, name: 'User 15' },
-    { id: 16, name: 'User 16' },
+    { id: 15, name: 'Luke' },
     { id: 17, name: 'User 17' },
     { id: 18, name: 'User 18' },
     { id: 19, name: 'User 19' },
@@ -36,6 +25,12 @@ function MessagePage() {
     { id: 22, name: 'User 22' },
     { id: 23, name: 'User 23' },
     { id: 24, name: 'User 24' },
+    { id: 25, name: 'User 25' },
+    { id: 26, name: 'User 26' },
+    { id: 27, name: 'User 27' },
+    { id: 28, name: 'User 28' },
+    { id: 29, name: 'User 29' },
+    { id: 30, name: 'User 30' },
   ]);
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
