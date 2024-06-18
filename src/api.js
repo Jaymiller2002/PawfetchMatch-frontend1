@@ -1,6 +1,18 @@
 import axios from 'axios'
 
-const baseUrl = "http://127.0.0.1:8000"
+// const baseUrl = (function() {
+//   if (NODE_ENV === 'development') {
+//     console.log('dev env')
+//     return 'http://127.0.0.1:8000'
+//   } else {
+//     console.log('prod')
+//     return 'https://pawfetchmatch-backend2-aged-sunset-9663.fly.dev'
+//   }
+// })
+
+const baseUrl = import.meta.env.VITE_BASE_URL
+
+console.log(baseUrl)
 
 export const getToken = ({ auth, username, password }) => {
   axios.post(`${baseUrl}/token/`, {
