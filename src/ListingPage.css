@@ -11,12 +11,13 @@
   width: 400px;
   margin-bottom: 40px;
   padding: 20px;
-  border: 1px solid #000000;
+  border: 1px solid #7a7a7a;
   -webkit-box-shadow: 0px 0px 15px 5px rgba(5, 5, 5, 0.85);
   -moz-box-shadow: 0px 0px 15px 5px rgba(20, 20, 20, 0.85);
   box-shadow: 0px 0px 15px 5px rgba(45, 45, 45, 0.85);
   border-radius: 5px;
-  background-color: #ccc;
+  background-color: #333;
+  color: white;
 }
 
 .create-listing-form h2,
@@ -32,12 +33,13 @@
   margin-bottom: 10px;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #000000;
+  border: 1px solid #ffffff;
   border-radius: 5px;
+  color: #ccc;
 }
 
-.create-listing-form button,
-.update-listing-form button {
+.create-listing-form .Create-button,
+.update-listing-form .Update-button {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -49,17 +51,17 @@
   transition: background-color 0.3s ease;
 }
 
-.create-listing-form button:focus,
-.update-listing-form button:focus {
+.create-listing-form .Create-button:focus,
+.update-listing-form .Update-button:focus {
   background-color: #008000aa;
 }
 
- .delete-listing button {
+ .delete-listing .delete-button {
   background-color: rgba(245, 0, 0, 0.8);
   transition: background-color 0.3s ease;
  }
  
- .delete-listing button:hover {
+ .delete-listing .delete-button:hover {
   background-color: rgba(255, 3, 3, 0.611);
  }
   

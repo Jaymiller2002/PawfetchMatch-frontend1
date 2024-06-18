@@ -7,12 +7,12 @@ function Header() {
   return (
     <div className="header-links">
       <Link to="/" className="header-link">
-        <i className="fa-solid fa-paw"></i>
+        <i className="fa-solid fa-paw" alt='PawfetchMatch'></i>
       </Link>
-      <Link to="/" className="header-link">Home</Link>
+      <Link to="/" className="header-link">Dashboard</Link>
       <Link to="/login" className="header-link">Login</Link>
       <Link to="/ListingPage" className="header-link">Listing</Link>
-      <Link to="/Profile" className="header-link">Profile</Link>
+      <Link to="/Profile" className="header-link">My Profile</Link>
       <Link to="/AllProfiles" className="header-link">All Profile's</Link>
       <LogoutButton />
     </div>

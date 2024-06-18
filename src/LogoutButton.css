@@ -1,22 +1,52 @@
+/* logoutButton.css */
 .logout-button {
-    color: #333;
-    border: none;
-    padding: 10px 20px;
-    font-size: 26px;
-    cursor: pointer;
-    border-radius: 5px;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  position: relative; /* Add position relative for ::after pseudo-element */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.logout-button::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; /* Adjusted to properly position the underline */
+  left: 0;
+  width: 0; /* Start with no width */
+  height: 1px;
+  background-color: #ff0000; /* Match the hover color */
+  transition: width 0.3s ease; /* Add transition for smooth effect */
+}
+
+.logout-button:hover::after {
+  width: 100%; /* Expand to full width on hover */
+}
+
+.logout-button:hover {
+  color: #ff0000;
+  text-decoration: none; /* Remove underline from text on hover */
+}
+
+.logout-button:active {
+  color: #000;
+}
+
+.logout-button:focus {
+  outline: none;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .logout-button {
+    font-size: 18px;
+    padding: 8px 16px;
   }
-  
-  .logout-button:hover {
-    color: #ff0000;
-    text-decoration: underline;
-  }
-  
-  .logout-button:active {
-    color: black;
-  }
-  
-  .logout-button:focus {
-    outline: none;
-  }
+}
+
+
   

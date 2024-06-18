@@ -1,4 +1,3 @@
-// All Profile's JSX
 import React, { useState, useEffect, useContext } from 'react';
 import { fetchAllProfiles } from './api'; // Adjust the path to match your API file
 import { AuthContext } from './context'; // Adjust the path to your AuthContext
@@ -32,9 +31,9 @@ const AllProfiles = () => {
 
   useEffect(() => {
     if (!auth.accessToken) {
-        navigate('/login');
+      navigate('/login');
     }
-}, [auth.accessToken, navigate]);
+  }, [auth.accessToken, navigate]);
 
   return (
     <div className='all-profiles-container'>
@@ -48,9 +47,11 @@ const AllProfiles = () => {
           {profiles.map(profile => (
             <li key={profile.id} className='profile-item'>
               <img className="profile-image" src={`http://127.0.0.1:8000${profile.image}`} alt="User Profile" />
-              <br />
-              <strong>{profile.first_name} {profile.last_name} Id: {profile.user}</strong>: {profile.bio}
-              {/* Add profile.image later (just has the link names not the actual image) */}
+              <div className="profile-details">
+                <div><strong>{profile.first_name} {profile.last_name}</strong></div>
+                <div><strong>Id: {profile.user}</strong></div>
+                <div>{profile.bio}</div>
+              </div>
             </li>
           ))}
         </ul>

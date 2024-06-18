@@ -68,7 +68,7 @@ function ListingPage() {
         <input onChange={e => setPrice(e.target.value)} type="number" name="price" placeholder="Price" />
         <input onChange={e => setQuantity(e.target.value)} type="number" name="quantity" placeholder="Quantity" />
         <input onChange={e => setImage(e.target.files[0])} type="file" name="image" accept="image/*" />
-        <button onClick={handleCreateListing}>Create Listing</button>
+        <button className='Create-button' onClick={handleCreateListing}>Create Listing</button>
       </div>
 
       <div className="update-listing-form">
@@ -78,11 +78,11 @@ function ListingPage() {
         <input onChange={e => setUpdatePrice(e.target.value)} type="number" name="updatePrice" placeholder="Update Price" />
         <input onChange={e => setUpdateQuantity(e.target.value)} type="number" name="updateQuantity" placeholder="Update Quantity" />
         <input onChange={e => setUpdateImage(e.target.files[0])} type="file" name="updateImage" accept="image/*" />
-        <button onClick={handleUpdateListing}>Update Listing</button>
+        <button className='Update-button' onClick={handleUpdateListing}>Update Listing</button>
       </div>
 
       <div className="delete-listing">
-        <button onClick={handleDeleteListing}>Delete Listing</button>
+        <button style={{background: 'red', backgroundColor: 'red'}} className='Delete-button' onClick={handleDeleteListing}>Delete Listing</button>
       </div>
     </div>
   );

@@ -24,6 +24,7 @@ function GetListings({ searchTerm }) {
             <ul className="card-container">
                 {listings.map((listing, index) => (
                     <li className="card" key={index}>
+                        <p>User Id: {listing.user}</p>
                         <p>Title: {listing.title}</p>
                         <p>Description: {listing.description}</p>
                         <p>Price: {listing.price}</p>

@@ -1,39 +1,64 @@
 /* Header.css */
 .header-links {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background-color: #ccc;
-  }
-  
-  .header-link {
-    text-decoration: none;
-    color: #333;
-    margin-right: 20px;
-    font-size: 26px;
-    cursor: pointer;
-  }
-  
-  .header-link:hover {
-    color: #007bff;
-    text-decoration: underline;
-  }
-  
-  .fa-paw {
-    font-size: 26px;
-    margin-right: 20px;
-    cursor: pointer;
-  }
-  /* Media Queries */
-  @media (max-width: 768px) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #333;
+}
+
+.header-link {
+  text-decoration: none;
+  color: #fff;
+  margin-right: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  margin: 0 auto;
+  position: relative; /* Added */
+}
+
+.header-link::before {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* Adjusted for spacing */
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #007bff;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.header-link:hover::before {
+  width: 50%; /* Full width on hover */
+  left: 0; /* Start from the beginning */
+}
+
+.header-link:hover {
+  color: #007bff;
+}
+
+.fa-paw {
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.fa-paw:hover {
+  color: #007bff;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
   .header-links {
     flex-direction: column;
     padding: 10px;
   }
 
   .header-link {
-    font-size: 20px;
+    font-size: 18px;
     margin: 5px 0;
   }
 
@@ -44,13 +69,13 @@
   }
 }
 
-  @media (max-width: 300px) {
+@media (max-width: 300px) {
   .header-link {
     font-size: 16px;
   }
 
   .fa-paw {
-    font-size: 16px;
+    font-size: 18px;
     margin-top: 5px;
   }
 }
