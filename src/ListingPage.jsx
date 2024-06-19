@@ -17,8 +17,10 @@ function ListingPage() {
   const [updatePrice, setUpdatePrice] = useState('');
   const [updateQuantity, setUpdateQuantity] = useState('');
   const [updateImage, setUpdateImage] = useState(undefined);
+  const [updateCount, setUpdateCount] = useState(1);
+  const [deleteCount, setDeleteCount] = useState(1);
   const navigate = useNavigate();
-  
+
   const handleCreateListing = async () => {
     try {
       const response = await createListing({ title, description, price, quantity, image, auth });
@@ -29,25 +31,39 @@ function ListingPage() {
   }
 
   const handleUpdateListing = async () => {
+    if (updateCount < 1 || updateCount > 10) {
+      alert('Update count must be between 1 and 10');
+      return;
+    }
+    
     try {
-      const response = await updateListing({ 
-        title: updateTitle, 
-        description: updateDescription, 
-        price: updatePrice, 
-        quantity: updateQuantity, 
-        image: updateImage, 
-        auth,
-      });
-      console.log('Listing updated:', response);
+      for (let i = 0; i < updateCount; i++) {
+        const response = await updateListing({ 
+          title: updateTitle, 
+          description: updateDescription, 
+          price: updatePrice, 
+          quantity: updateQuantity, 
+          image: updateImage, 
+          auth,
+        });
+        console.log('Listing updated:', response);
+      }
     } catch (error) {
       console.error('Error updating listing:', error);
     }
   }
 
   const handleDeleteListing = async () => {
+    if (deleteCount < 1 || deleteCount > 10) {
+      alert('Delete count must be between 1 and 10');
+      return;
+    }
+    
     try {
-      await deleteListing({ auth });
-      console.log('Listing deleted');
+      for (let i = 0; i < deleteCount; i++) {
+        await deleteListing({ auth });
+        console.log('Listing deleted');
+      }
     } catch (error) {
       console.error('Error deleting listing:', error);
     }
@@ -78,10 +94,12 @@ function ListingPage() {
         <input onChange={e => setUpdatePrice(e.target.value)} type="number" name="updatePrice" placeholder="Update Price" />
         <input onChange={e => setUpdateQuantity(e.target.value)} type="number" name="updateQuantity" placeholder="Update Quantity" />
         <input onChange={e => setUpdateImage(e.target.files[0])} type="file" name="updateImage" accept="image/*" />
+        <input onChange={e => setUpdateCount(Number(e.target.value))} type="number" name="updateCount" placeholder="Number of Listings to Update (1-10)" min="1" max="10" />
         <button className='Update-button' onClick={handleUpdateListing}>Update Listing</button>
       </div>
 
       <div className="delete-listing">
+        <input onChange={e => setDeleteCount(Number(e.target.value))} type="number" name="deleteCount" placeholder="Number of Listings to Delete (1-10)" min="1" max="10" />
         <button style={{background: 'red', backgroundColor: 'red'}} className='Delete-button' onClick={handleDeleteListing}>Delete Listing</button>
       </div>
     </div>
@@ -89,6 +107,7 @@ function ListingPage() {
 }
 
 export default ListingPage;
+
 
 
 
