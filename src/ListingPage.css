@@ -65,4 +65,54 @@
   background-color: rgba(255, 3, 3, 0.611);
  }
   
+ /* Media Queries */
+@media (max-width: 768px) {
+  .create-listing-form,
+  .update-listing-form {
+    width: 80%; /* Adjust form width for tablets */
+    max-width: 400px; /* Limit maximum width */
+  }
+}
+
+@media (max-width: 480px) {
+  .create-listing-form,
+  .update-listing-form {
+    width: 90%; /* Adjust form width for mobile devices */
+    max-width: 100%; /* Take full width of the screen */
+    padding: 15px; /* Reduce padding for smaller screens */
+    margin-bottom: 20px; /* Adjust margin */
+  }
+
+  .create-listing-form h2,
+  .update-listing-form h2 {
+    font-size: 20px; /* Increase heading font size */
+    margin-bottom: 15px; /* Adjust heading margin */
+  }
+
+  .create-listing-form .Create-button,
+  .update-listing-form .Update-button {
+    font-size: 14px; /* Decrease button font size */
+    padding: 8px; /* Adjust button padding */
+  }
+}
+
+@media (max-width: 375px) {
+  .create-listing-form,
+  .update-listing-form {
+    padding: 10px; /* Further reduce padding for smallest screens */
+    margin-bottom: 10px; /* Further adjust margin */
+  }
+
+  .create-listing-form h2,
+  .update-listing-form h2 {
+    font-size: 18px; /* Further adjust heading font size */
+    margin-bottom: 10px; /* Further adjust heading margin */
+  }
+
+  .create-listing-form .Create-button,
+  .update-listing-form .Update-button {
+    font-size: 12px; /* Further decrease button font size */
+    padding: 6px; /* Further adjust button padding */
+  }
+}
   

@@ -66,3 +66,41 @@ button:hover {
 .delete-button:hover {
   background-color: #c82333;
 }
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .send-message-container,
+  .update-message-container {
+    width: 90%; /* Adjust width for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .send-message-container,
+  .update-message-container {
+    width: 100%; /* Full width for mobile devices */
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+  
+  .form-container {
+    padding: 15px; /* Adjust form padding for smaller screens */
+  }
+  
+  button {
+    font-size: 14px; /* Decrease button font size for smaller screens */
+    padding: 8px 16px; /* Adjust button padding for smaller screens */
+  }
+}
+
+@media (max-width: 375px) {
+  textarea,
+  input[type="file"] {
+    font-size: 14px; /* Decrease input font size for smallest screens */
+    padding: 8px; /* Adjust input padding for smallest screens */
+  }
+
+  button {
+    font-size: 12px; /* Further decrease button font size for smallest screens */
+    padding: 8px 14px; /* Further adjust button padding for smallest screens */
+  }
+}

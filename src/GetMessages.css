@@ -29,3 +29,45 @@
     margin-top: 10px;
   }
   
+  /* Media Queries */
+@media (max-width: 768px) {
+  .messages-container {
+    margin: 20px; /* Reduce margin on smaller screens */
+  }
+
+  .message {
+    padding: 8px; /* Reduce padding for messages */
+  }
+
+  .message-image {
+    max-width: 80px; /* Adjust image size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .messages-container {
+    margin: 10px; /* Further reduce margin on very small screens */
+  }
+
+  .message {
+    padding: 6px; /* Further reduce padding for messages */
+  }
+
+  .message-image {
+    max-width: 60px; /* Adjust image size for very small screens */
+  }
+}
+
+@media (max-width: 375px) {
+  .messages-container {
+    margin: 5px; /* Minimal margin on the smallest screens */
+  }
+
+  .message {
+    padding: 4px; /* Minimal padding for messages */
+  }
+
+  .message-image {
+    max-width: 50px; /* Adjust image size for the smallest screens */
+  }
+}

@@ -70,4 +70,38 @@
 .profile-details > div {
   margin-bottom: 4px;
 }
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .profile-item {
+    width: calc(100% - 20px); /* Full width on tablets */
+    height: auto; /* Adjust height to content */
+  }
+}
+
+@media (max-width: 480px) {
+  .all-profiles-container {
+    padding: 15px;
+  }
   
+  .page-title {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .loading-message,
+  .error-message {
+    font-size: 16px;
+  }
+  
+  .profile-item {
+    width: calc(100% - 20px); /* Full width on mobile devices */
+    height: auto; /* Adjust height to content */
+    font-size: 10px; /* Slightly smaller text on mobile */
+  }
+  
+  .profile-item img {
+    max-width: 80px; /* Smaller image on mobile */
+    margin-left: 5px;
+  }
+}
