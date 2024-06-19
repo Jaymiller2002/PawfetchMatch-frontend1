@@ -29,7 +29,7 @@ function GetListings({ searchTerm }) {
                         <p>Description: {listing.description}</p>
                         <p>Price: {listing.price}</p>
                         <p>Quantity: {listing.quantity}</p>
-                        <img src={`http://127.0.0.1:8000${listing.image}`} alt={listing.title} />
+                        <img src={`https://pawfetch-match-frontend1.vercel.app${listing.image}`} alt={listing.title} />
                     </li>
                 ))}
             </ul>
