@@ -252,11 +252,11 @@ body {
 
 /* FOOTER CSS */
 footer {
-  background-color: #333; /* Match the background color of login and new user containers */
-  color: white; /* White text color */
+  background-color: #333; 
+  color: white; 
   padding: 20px;
   text-align: center;
-  border-top: 1px solid #000000; /* Consistent border color */
+  border-top: 1px solid #000000; 
 }
 
 footer div {
@@ -265,18 +265,18 @@ footer div {
 
 footer p {
   margin: 5px 0;
-  font-size: 16px; /* Font size to match overall theme */
+  font-size: 16px; 
 }
 
 footer a {
-  color: #008000; /* Match the green color used for buttons */
+  color: white; 
   text-decoration: none;
   margin: 0 10px;
   transition: color 0.3s ease;
 }
 
 footer a:hover {
-  color: #008000aa; /* Lighter green on hover to match button hover effect */
+  color: #0d48adaa; 
 }
 
 
