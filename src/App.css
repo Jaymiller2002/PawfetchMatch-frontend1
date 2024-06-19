@@ -358,8 +358,8 @@ body {
   .search-button {
     border-radius: 5px;
     font-size: 14px;
-    margin-left: 50px;
-    margin-bottom: 20px;
+    margin-left: 150px;
+    bottom: 20px;
   }
 
   .search-button i {
