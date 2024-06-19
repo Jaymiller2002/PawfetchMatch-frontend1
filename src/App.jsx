@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import GetListings from "./GetListings";
-import Footer from './Footer';
 import './App.css';
 
 function App() {
@@ -29,7 +28,6 @@ function App() {
       <div className='listings-container'>
         <GetListings searchTerm={searchTerm} />
       </div>
-      <Footer />
     </div>
   );
 }
