@@ -2,8 +2,8 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #333 transparent; /* Changed background color */
-  border: 1px solid #555 transparent; /* Changed border color */
+  background-color: #333;
+  border: 1px solid #555;
   border-radius: 8px;
   margin-top: 60px;
   margin-bottom: 15px;
@@ -14,51 +14,51 @@
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
-  color: #fff; /* Changed text color to white */
+  color: #fff;
 }
 
 .loading-message,
 .error-message {
   font-size: 18px;
   text-align: center;
-  color: #ccc; /* Changed text color to light gray */
+  color: #ccc;
 }
 
 .profile-list {
   list-style-type: none;
   padding: 0;
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  flex-wrap: wrap; /* Ensure items wrap to new line */
+  justify-content: space-between; /* Maintain gap between items */
 }
 
 .profile-item {
+  flex: 0 1 calc(50% - 20px); /* Two items per row with gap */
   margin-bottom: 25px;
   padding: 10px;
   color: white;
-  background-color: #444; /* Changed background color */
-  border: 1px solid #666; /* Changed border color */
+  background-color: #444;
+  border: 1px solid #666;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: 0.3s ease;
-  width: 50%;
   height: 200px;
   font-size: 12px;
 }
 
 .profile-item:hover {
-  box-shadow: 0px 0px 15px 5px rgba(45, 45, 45, 0.85); /* Changed box-shadow on hover */
+  box-shadow: 0px 0px 15px 5px rgba(45, 45, 45, 0.85);
 }
 
 .profile-item strong {
   font-weight: bold;
   cursor: pointer;
-  color: #fff; /* Changed text color to white */
+  color: #fff;
 }
 
 .profile-item img {
-  max-width: 100px; /* Example styling for profile images */
+  max-width: 100px;
   height: auto;
   margin-left: 10px;
   border-radius: 50%;
@@ -67,6 +67,7 @@
 .profile-details {
   margin-top: 8px;
 }
+
 .profile-details > div {
   margin-bottom: 4px;
 }
@@ -74,8 +75,7 @@
 /* Media Queries */
 @media (max-width: 768px) {
   .profile-item {
-    width: calc(50% - 10px); /* Two items per row on tablets */
-    height: auto;
+    flex: 0 1 calc(50% - 10px); /* Two items per row on tablets */
   }
 }
 
@@ -95,7 +95,7 @@
   }
   
   .profile-item {
-    width: calc(100% - 20px); /* Full width on mobile devices */
+    flex: 0 1 calc(100% - 20px); /* One item per row on mobile devices */
     font-size: 10px; /* Smaller text size on mobile */
     margin-bottom: 15px;
   }
