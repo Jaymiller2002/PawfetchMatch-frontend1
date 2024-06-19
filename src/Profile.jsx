@@ -80,7 +80,7 @@ function Profile() {
         <div className="profile-container">
             <div className="profile-header">
                 <h1 className="profile-username">{username}</h1>
-                <img className="profile-image" src={`${baseUrl}/${image}`} alt="User Profile" />
+                <img className="profile-image" src={`${baseUrl}${image}`} alt="User Profile" />
                 <p className="profile-bio">{bio}</p>
                 <button className='dropdown-button' onClick={toggleProfileForm}>
                     {showProfileForm ? 'Hide Profile Form' : 'Show Profile Form'}
