@@ -74,8 +74,8 @@
 /* Media Queries */
 @media (max-width: 768px) {
   .profile-item {
-    width: calc(100% - 20px); /* Full width on tablets */
-    height: auto; /* Adjust height to content */
+    width: calc(50% - 10px); /* Two items per row on tablets */
+    height: auto;
   }
 }
 
@@ -96,12 +96,12 @@
   
   .profile-item {
     width: calc(100% - 20px); /* Full width on mobile devices */
-    height: auto; /* Adjust height to content */
-    font-size: 10px; /* Slightly smaller text on mobile */
+    font-size: 10px; /* Smaller text size on mobile */
+    margin-bottom: 15px;
   }
   
   .profile-item img {
-    max-width: 80px; /* Smaller image on mobile */
+    max-width: 80px; /* Smaller image size on mobile */
     margin-left: 5px;
   }
 }
