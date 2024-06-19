@@ -3,6 +3,7 @@ import { fetchAllProfiles } from './api'; // Adjust the path to match your API f
 import { AuthContext } from './context'; // Adjust the path to your AuthContext
 import './AllProfiles.css';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from './api';
 
 const AllProfiles = () => {
   const [profiles, setProfiles] = useState([]);
@@ -46,7 +47,7 @@ const AllProfiles = () => {
         <ul className='profile-list'>
           {profiles.map(profile => (
             <li key={profile.id} className='profile-item'>
-              <img className="profile-image" src={`https://pawfetch-match-frontend1.vercel.app${profile.image}`} alt="User Profile" />
+              <img className="profile-image" src={`${baseUrl}${profile.image}`} alt="User Profile" />
               <div className="profile-details">
                 <div><strong>{profile.first_name} {profile.last_name}</strong></div>
                 <div><strong>Id: {profile.user}</strong></div>

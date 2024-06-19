@@ -3,6 +3,7 @@ import { fetchUser, updateUser, deleteUser } from './api';
 import { AuthContext } from './context';
 import './Profile.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { baseUrl } from './api';
 
 function Profile() {
     const [username, setUsername] = useState('');
@@ -79,7 +80,7 @@ function Profile() {
         <div className="profile-container">
             <div className="profile-header">
                 <h1 className="profile-username">{username}</h1>
-                <img className="profile-image" src={`https://pawfetch-match-frontend1.vercel.app${image}`} alt="User Profile" />
+                <img className="profile-image" src={`${baseUrl}${image}`} alt="User Profile" />
                 <p className="profile-bio">{bio}</p>
                 <button className='dropdown-button' onClick={toggleProfileForm}>
                     {showProfileForm ? 'Hide Profile Form' : 'Show Profile Form'}

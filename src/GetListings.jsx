@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getListing } from './api';
 import './GetListings.css';
+import { baseUrl } from './api';
 
 function GetListings({ searchTerm }) {
     const [listings, setListings] = useState([]);
@@ -29,7 +30,7 @@ function GetListings({ searchTerm }) {
                         <p>Description: {listing.description}</p>
                         <p>Price: {listing.price}</p>
                         <p>Quantity: {listing.quantity}</p>
-                        <img src={`https://pawfetch-match-frontend1.vercel.app${listing.image}`} alt={listing.title} />
+                        <img src={`${baseUrl}${listing.image}`} alt={listing.title} />
                     </li>
                 ))}
             </ul>

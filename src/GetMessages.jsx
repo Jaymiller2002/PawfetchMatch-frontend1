@@ -3,6 +3,7 @@ import { AuthContext } from './context';
 import { getMessages } from './api'; // Assuming getMessages function is defined in api.js
 import { useNavigate } from 'react-router-dom';
 import './GetMessages.css'
+import { baseUrl } from './api';
 
 function GetMessages() {
   const [messages, setMessages] = useState([]);
@@ -42,7 +43,7 @@ function GetMessages() {
         <div key={message.id} className="message">
           <div className='message-sender'>Sender: {message.sender}</div>
           <div className='message-content'>Content: {message.content}</div>
-          <img src={`https://pawfetch-match-frontend1.vercel.app${message.image}`} alt="Message Image" className='message-image'/>
+          <img src={`${baseUrl}${message.image}`} alt="Message Image" className='message-image'/>
         </div>
       ))}
     </div>
