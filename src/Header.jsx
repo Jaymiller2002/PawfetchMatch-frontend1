@@ -14,7 +14,7 @@ function Header() {
     <div className="header-container">
       <div className="header-links">
         <Link to="/" className="header-link">
-          <i className="fa-solid fa-paw" alt='PawfetchMatch'></i>
+          <i className="fa-solid fa-paw" alt='Doglist'></i>
         </Link>
         <div className={`nav-links ${isOpen ? 'open' : ''}`}>
           <Link to="/" className="header-link">Dashboard</Link>
