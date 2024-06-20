@@ -55,7 +55,7 @@ function ListingPage() {
       setUpdatePrice('');
       setUpdateQuantity('');
       setUpdateImage(undefined);
-      setListingId(''); // Clear listingId after update
+      setId(''); // Clear listingId after update
     } catch (error) {
       console.error('Error updating listing:', error);
     }
@@ -90,7 +90,7 @@ function ListingPage() {
 
       <div className="update-listing-form">
         <h2>Update Listing</h2>
-        <input onChange={e => setId(e.target.value)} type="text" name="listingId" placeholder="Enter Listing ID" value={Id} />
+        <input onChange={e => setId(e.target.value)} type="text" name="Id" placeholder="Enter ID" value={Id} />
         <input onChange={e => setUpdateTitle(e.target.value)} type="text" name="updateTitle" placeholder="Update Title" value={updateTitle} />
         <textarea onChange={e => setUpdateDescription(e.target.value)} name="updateDescription" placeholder="Update Description" value={updateDescription}></textarea>
         <input onChange={e => setUpdatePrice(e.target.value)} type="number" name="updatePrice" placeholder="Update Price" value={updatePrice} />
