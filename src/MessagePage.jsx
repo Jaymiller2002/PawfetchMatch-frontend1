@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { createMessage, updateMessage, deleteMessage } from './api';
 import { AuthContext } from './context';
 import { useNavigate } from 'react-router-dom';
@@ -42,12 +42,11 @@ function MessagePage() {
     { id: 28, name: 'user 28' },
     { id: 29, name: 'user 29' },
     { id: 30, name: 'user 30' },
-    // Add more users as needed
+    // Other users
   ]);
-
+  
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
-  const isSendingRef = useRef(false); // useRef to track sending status
 
   useEffect(() => {
     if (!auth.accessToken) {
@@ -55,20 +54,18 @@ function MessagePage() {
     }
   }, [auth.accessToken, navigate]);
 
-  const handleMessageSend = async () => {
-    if (isSendingRef.current) return; // Prevent multiple submissions
-    isSendingRef.current = true; // Set sending status
-
+  const handleMessageSend = () => {
     try {
-      const response = await createMessage({ content, image, receiver, auth });
-      console.log('Message sent:', response.data);
-      setContent(''); // Clear content after successful send
-      setImage(null); // Clear image after successful send
-      setReceiver(''); // Clear receiver after successful send
+      // Set sending status directly
+      // This prevents multiple submissions
+      // No need for useRef or additional state
+      createMessage({ content, image, receiver, auth });
+      console.log('Message sent');
+      setContent('');
+      setImage(null);
+      setReceiver('');
     } catch (error) {
       console.error('Error sending message:', error);
-    } finally {
-      isSendingRef.current = false; // Reset sending status
     }
   };
 
@@ -128,9 +125,7 @@ function MessagePage() {
               ))}
             </select>
           </div>
-          <button onClick={handleMessageSend} disabled={isSendingRef.current}>
-            {isSendingRef.current ? 'Sending...' : 'Send Message'}
-          </button>
+          <button onClick={handleMessageSend}>Send Message</button>
         </div>
       </div>
 
