@@ -61,6 +61,10 @@ function MessagePage() {
     try {
       const response = await createMessage({ content, image, receiver, auth });
       console.log('Message sent:', response.data);
+      // Clear inputs after sending message
+      setContent('');
+      setImage(null);
+      setReceiver('');
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -70,6 +74,10 @@ function MessagePage() {
     try {
       const response = await updateMessage({ content: updateContent, image: updateImage, receiver, auth });
       console.log('Message updated:', response.data);
+      // Clear inputs after updating message
+      setUpdateContent('');
+      setUpdateImage(null);
+      setReceiver('');
     } catch (error) {
       console.error('Error updating message:', error);
     }
@@ -79,6 +87,8 @@ function MessagePage() {
     try {
       const response = await deleteMessage({ receiver, auth });
       console.log('Message deleted:', response.data);
+      // Clear receiver input after deleting message
+      setReceiver('');
     } catch (error) {
       console.error('Error deleting message:', error);
     }
@@ -199,6 +209,7 @@ function MessagePage() {
 }
 
 export default MessagePage;
+
 
 
 
