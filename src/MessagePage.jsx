@@ -11,8 +11,6 @@ function MessagePage() {
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
-  const [updateCount, setUpdateCount] = useState(1);
-  const [deleteCount, setDeleteCount] = useState(1);
   const [users] = useState([
     // Will have to update with each new user
     { id: 1, name: 'user 1'},
@@ -69,32 +67,18 @@ function MessagePage() {
   };
 
   const handleUpdateMessage = async () => {
-    if (updateCount < 1 || updateCount > 10) {
-      alert('Update count must be between 1 and 10');
-      return;
-    }
-
     try {
-      for (let i = 0; i < updateCount; i++) {
-        const response = await updateMessage({ content: updateContent, image: updateImage, auth });
-        console.log('Message updated:', response.data);
-      }
+      const response = await updateMessage({ content: updateContent, image: updateImage, receiver, auth });
+      console.log('Message updated:', response.data);
     } catch (error) {
       console.error('Error updating message:', error);
     }
   };
 
   const handleDeleteMessage = async () => {
-    if (deleteCount < 1 || deleteCount > 10) {
-      alert('Delete count must be between 1 and 10');
-      return;
-    }
-
     try {
-      for (let i = 0; i < deleteCount; i++) {
-        const response = await deleteMessage({ auth });
-        console.log('Message deleted:', response.data);
-      }
+      const response = await deleteMessage({ receiver, auth });
+      console.log('Message deleted:', response.data);
     } catch (error) {
       console.error('Error deleting message:', error);
     }
@@ -130,7 +114,7 @@ function MessagePage() {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor="receiver"></label>
+            <label htmlFor="receiver">Select Receiver:</label>
             <select
               id="receiver"
               value={receiver}
@@ -139,7 +123,7 @@ function MessagePage() {
               <option value="">Select Receiver</option>
               {users.map(user => (
                 <option key={user.id} value={user.id}>
-                  {user.name} ({user.id})
+                  {user.name}
                 </option>
               ))}
             </select>
@@ -149,7 +133,7 @@ function MessagePage() {
       </div>
 
       <div className='update-message-container'>
-        <h1>Update Message</h1>
+        <h1>Select Message to Update</h1>
         <div className='form-container update-message-form'>
           <div className='form-group'>
             <label htmlFor="updateContent">Update Content:</label>
@@ -170,15 +154,19 @@ function MessagePage() {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor="updateCount">Number of Messages to Update (1-10):</label>
-            <input
-              type="number"
-              id="updateCount"
-              value={updateCount}
-              onChange={(e) => setUpdateCount(Number(e.target.value))}
-              min="1"
-              max="10"
-            />
+            <label htmlFor="updateReceiver">Select Message to Update:</label>
+            <select
+              id="updateReceiver"
+              value={receiver}
+              onChange={(e) => setReceiver(e.target.value)}
+            >
+              <option value="">Select Message to Update</option>
+              {users.map(user => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
           </div>
           <button onClick={handleUpdateMessage}>Update Message</button>
         </div>
@@ -188,16 +176,21 @@ function MessagePage() {
         <GetMessages />
       </div>
       <div className='delete-message-container'>
+        <h1>Select Message to Delete</h1>
         <div className='form-group'>
-          <label htmlFor="deleteCount">Number of Messages to Delete (1-10):</label>
-          <input
-            type="number"
-            id="deleteCount"
-            value={deleteCount}
-            onChange={(e) => setDeleteCount(Number(e.target.value))}
-            min="1"
-            max="10"
-          />
+          <label htmlFor="deleteReceiver">Select Message to Delete:</label>
+          <select
+            id="deleteReceiver"
+            value={receiver}
+            onChange={(e) => setReceiver(e.target.value)}
+          >
+            <option value="">Select Message to Delete</option>
+            {users.map(user => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
+          </select>
         </div>
         <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
       </div>
@@ -206,6 +199,7 @@ function MessagePage() {
 }
 
 export default MessagePage;
+
 
 
 
