@@ -11,6 +11,7 @@ function MessagePage() {
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
+  const [deleteReceiver, setDeleteReceiver] = useState('');
   const [users] = useState([
     // Will have to update with each new user
     { id: 1, name: 'user 1'},
@@ -95,11 +96,11 @@ function MessagePage() {
 
   const handleDeleteMessage = () => {
     try {
-      deleteMessage({ receiver, auth })
+      deleteMessage({ receiver: deleteReceiver, auth })
         .then(response => {
           console.log('Message deleted:', response.data);
           // Clear receiver input after deleting message
-          setReceiver('');
+          setDeleteReceiver('');
         })
         .catch(error => {
           console.error('Error deleting message:', error);
@@ -178,21 +179,6 @@ function MessagePage() {
               onChange={(e) => setUpdateImage(e.target.files[0])}
             />
           </div>
-          <div className='form-group'>
-            <label htmlFor="updateReceiver">Select Message to Update:</label>
-            <select
-              id="updateReceiver"
-              value={receiver}
-              onChange={(e) => setReceiver(e.target.value)}
-            >
-              <option value="">Select Message to Update</option>
-              {users.map(user => (
-                <option key={user.id} value={user.id}>
-                  {user.name}
-                </option>
-              ))}
-            </select>
-          </div>
           <button onClick={handleUpdateMessage}>Update Message</button>
         </div>
       </div>
@@ -200,23 +186,9 @@ function MessagePage() {
       <div>
         <GetMessages />
       </div>
+
       <div className='delete-message-container'>
         <h1>Select Message to Delete</h1>
-        <div className='form-group'>
-          <label htmlFor="deleteReceiver">Select Message to Delete:</label>
-          <select
-            id="deleteReceiver"
-            value={receiver}
-            onChange={(e) => setReceiver(e.target.value)}
-          >
-            <option value="">Select Message to Delete</option>
-            {users.map(user => (
-              <option key={user.id} value={user.id}>
-                {user.name}
-              </option>
-            ))}
-          </select>
-        </div>
         <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
       </div>
     </div>
@@ -224,6 +196,7 @@ function MessagePage() {
 }
 
 export default MessagePage;
+
 
 
 
