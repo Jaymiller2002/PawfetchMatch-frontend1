@@ -14,50 +14,27 @@ function MessagePage() {
   const [updateCount, setUpdateCount] = useState(1);
   const [deleteCount, setDeleteCount] = useState(1);
   const [users] = useState([
-    // Will have to update with each new user
-    { id: 1, name: 'user 1'},
-    { id: 2, name: 'Jason Mize'},
-    { id: 3, name: 'Jay Miller'},
-    { id: 4, name: 'user 4'},
-    { id: 5, name: 'Morgan Miller'},
-    { id: 6, name: 'Kailey Miller'},
-    { id: 7, name: 'DeeAnn Miller'},
-    { id: 8, name: 'user 8'},
-    { id: 9, name: 'user 9'},
-    { id: 10, name: 'user 10'},
-    { id: 11, name: 'user 11'},
-    { id: 12, name: 'user 12'},
-    { id: 13, name: 'user 13'},
-    { id: 14, name: 'user 14'},
-    { id: 15, name: 'user 15'},
-    { id: 16, name: 'user 16'},
-    { id: 17, name: 'user 17'},
-    { id: 18, name: 'user 18'},
-    { id: 19, name: 'user 19'},
-    { id: 20, name: 'user 20'},
-    { id: 21, name: 'user 21'},
-    { id: 22, name: 'user 22'},
-    { id: 23, name: 'user 23'},
-    { id: 24, name: 'user 24'},
-    { id: 25, name: 'user 25'},
-    { id: 26, name: 'user 26'},
-    { id: 27, name: 'user 27'},
-    { id: 28, name: 'user 28'},
-    { id: 29, name: 'user 29'},
-    { id: 30, name: 'user 30'},
-    { id: 31, name: 'user 31'},
-    { id: 32, name: 'user 32'},
-    { id: 33, name: 'user 33'},
-    { id: 34, name: 'user 34'},
-    { id: 35, name: 'user 35'},
-    { id: 36, name: 'user 36'},
-    { id: 37, name: 'user 37'},
-    { id: 38, name: 'user 38'},
-    { id: 39, name: 'user 39'},
-    { id: 40, name: 'user 40'},
+    { id: 1, name: 'user 1' },
+    { id: 2, name: 'Jason Mize' },
+    { id: 3, name: 'Jay Miller' },
+    { id: 4, name: 'user 4' },
+    { id: 5, name: 'Morgan Miller' },
+    { id: 6, name: 'Kailey Miller' },
+    { id: 7, name: 'DeeAnn Miller' },
+    { id: 8, name: 'user 8' },
+    { id: 9, name: 'user 9' },
+    { id: 10, name: 'user 10' },
+    // Add more users as needed
   ]);
+
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth.accessToken) {
+      navigate('/login');
+    }
+  }, [auth.accessToken, navigate]);
 
   const handleMessageSend = async () => {
     try {
@@ -100,12 +77,6 @@ function MessagePage() {
     }
   };
 
-  useEffect(() => {
-    if (!auth.accessToken) {
-      navigate('/login');
-    }
-  }, [auth.accessToken, navigate]);
-
   return (
     <div className='message-page-container'>
       <div className='send-message-container'>
@@ -130,7 +101,7 @@ function MessagePage() {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor="receiver"></label>
+            <label htmlFor="receiver">Receiver:</label>
             <select
               id="receiver"
               value={receiver}
@@ -139,7 +110,7 @@ function MessagePage() {
               <option value="">Select Receiver</option>
               {users.map(user => (
                 <option key={user.id} value={user.id}>
-                  {user.name} ({user.id})
+                  {user.name}
                 </option>
               ))}
             </select>
@@ -187,25 +158,30 @@ function MessagePage() {
       <div>
         <GetMessages />
       </div>
+
       <div className='delete-message-container'>
-        <div className='form-group'>
-          <label htmlFor="deleteCount">Number of Messages to Delete (1-10):</label>
-          <input
-            type="number"
-            id="deleteCount"
-            value={deleteCount}
-            onChange={(e) => setDeleteCount(Number(e.target.value))}
-            min="1"
-            max="10"
-          />
+        <h1>Delete Message</h1>
+        <div className='form-container delete-message-form'>
+          <div className='form-group'>
+            <label htmlFor="deleteCount">Number of Messages to Delete (1-10):</label>
+            <input
+              type="number"
+              id="deleteCount"
+              value={deleteCount}
+              onChange={(e) => setDeleteCount(Number(e.target.value))}
+              min="1"
+              max="10"
+            />
+          </div>
+          <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
         </div>
-        <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
       </div>
     </div>
   );
 }
 
 export default MessagePage;
+
 
 
 
