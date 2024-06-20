@@ -13,14 +13,14 @@ function Profile() {
     const [newLastName, setNewLastName] = useState('');
     const [newBio, setNewBio] = useState('');
     const [newImage, setNewImage] = useState(null);
-    const [showProfileForm, setShowProfileForm] = useState(false); // State for showing profile form
+    const [showProfileForm, setShowProfileForm] = useState(false);
+    const [error, setError] = useState('');
     const { auth } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (auth.accessToken) {
             fetchUserData();
-            // Polling for updates every 10 seconds
             const interval = setInterval(fetchUserData, 10000);
             return () => clearInterval(interval);
         }
@@ -47,6 +47,11 @@ function Profile() {
     };
 
     const handleUpdateProfile = async () => {
+        if (!newFirstName || !newLastName || !newBio || !newImage) {
+            setError('All fields are required.');
+            return;
+        }
+
         try {
             await updateUser({
                 auth,
@@ -55,7 +60,12 @@ function Profile() {
                 bio: newBio,
                 image: newImage ? newImage : image
             });
-            // Optionally, implement some feedback mechanism after the update
+            // Clear input fields after successful update
+            setNewFirstName('');
+            setNewLastName('');
+            setNewBio('');
+            setNewImage(null);
+            setError(''); // Clear error message on successful update
         } catch (error) {
             console.error('Error updating user:', error);
             // Handle error
@@ -89,6 +99,7 @@ function Profile() {
 
             {showProfileForm && (
                 <div className="profile-form">
+                    {error && <p className="error-message">{error}</p>}
                     <input 
                         type="text" 
                         placeholder="New First Name" 
