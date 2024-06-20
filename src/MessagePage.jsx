@@ -21,7 +21,7 @@ function MessagePage() {
     { id: 4, name: 'user 4'},
     { id: 5, name: 'Morgan Miller'},
     { id: 6, name: 'Kailey Miller'},
-    { id: 7, name: 'user 7'},
+    { id: 7, name: 'DeeAnn Miller'},
     { id: 8, name: 'user 8'},
     { id: 9, name: 'user 9'},
     { id: 10, name: 'user 10'},
