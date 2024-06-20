@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { createMessage, updateMessage, deleteMessage } from './api';
 import { AuthContext } from './context';
 import { useNavigate } from 'react-router-dom';
@@ -47,7 +47,7 @@ function MessagePage() {
 
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [isSending, setIsSending] = useState(false); // State to manage sending status
+  const isSendingRef = useRef(false); // useRef to track sending status
 
   useEffect(() => {
     if (!auth.accessToken) {
@@ -56,19 +56,19 @@ function MessagePage() {
   }, [auth.accessToken, navigate]);
 
   const handleMessageSend = async () => {
-    if (isSending) return; // Prevent sending multiple times
-    setIsSending(true); // Set sending status to true
+    if (isSendingRef.current) return; // Prevent multiple submissions
+    isSendingRef.current = true; // Set sending status
 
     try {
       const response = await createMessage({ content, image, receiver, auth });
       console.log('Message sent:', response.data);
-      setContent(''); // Clear the message content after sending
-      setImage(null); // Clear the selected image after sending
-      setReceiver(''); // Reset receiver to default after sending
+      setContent(''); // Clear content after successful send
+      setImage(null); // Clear image after successful send
+      setReceiver(''); // Clear receiver after successful send
     } catch (error) {
       console.error('Error sending message:', error);
     } finally {
-      setIsSending(false); // Reset sending status regardless of success or failure
+      isSendingRef.current = false; // Reset sending status
     }
   };
 
@@ -128,8 +128,8 @@ function MessagePage() {
               ))}
             </select>
           </div>
-          <button onClick={handleMessageSend} disabled={isSending}>
-            {isSending ? 'Sending...' : 'Send Message'}
+          <button onClick={handleMessageSend} disabled={isSendingRef.current}>
+            {isSendingRef.current ? 'Sending...' : 'Send Message'}
           </button>
         </div>
       </div>

@@ -10,7 +10,7 @@ function Footer() {
       </div>
       <div>
         <a
-          href="https://portfolio-landing-page-o5j8sij4y-jaymiller2002s-projects.vercel.app/"
+          href="https://jaysportfolio.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
         >
