@@ -30,9 +30,11 @@ function Header() {
           <span></span>
         </div>
       </div>
+      {isOpen && <div className="backdrop" onClick={toggleMenu}></div>}
     </div>
   );
 }
 
 export default Header;
+
 
