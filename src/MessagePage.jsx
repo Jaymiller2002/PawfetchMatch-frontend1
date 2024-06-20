@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { createMessage, updateMessage, deleteMessage } from './api';
 import { AuthContext } from './context';
 import { useNavigate } from 'react-router-dom';
@@ -44,26 +44,24 @@ function MessagePage() {
     { id: 30, name: 'user 30' },
     // Other users
   ]);
-  
+
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
+    // Redirect to login page if user is not authenticated
     if (!auth.accessToken) {
       navigate('/login');
+      return null; // Return null or loading indicator while redirecting
     }
-  }, [auth.accessToken, navigate]);
 
-  const handleMessageSend = () => {
+  const handleMessageSend = async () => {
     try {
-      // Set sending status directly
-      // This prevents multiple submissions
-      // No need for useRef or additional state
-      createMessage({ content, image, receiver, auth });
+      await createMessage({ sender: receiver, content, image, auth });
       console.log('Message sent');
       setContent('');
       setImage(null);
       setReceiver('');
+      // Optionally, you can fetch messages again after creation
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -73,6 +71,7 @@ function MessagePage() {
     try {
       const response = await updateMessage({ content: updateContent, image: updateImage, auth });
       console.log('Message updated:', response.data);
+      // Optionally, you can fetch messages again after update
     } catch (error) {
       console.error('Error updating message:', error);
     }
@@ -82,6 +81,7 @@ function MessagePage() {
     try {
       const response = await deleteMessage({ auth });
       console.log('Message deleted:', response.data);
+      // Optionally, you can fetch messages again after deletion
     } catch (error) {
       console.error('Error deleting message:', error);
     }
