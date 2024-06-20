@@ -63,7 +63,7 @@ function ListingPage() {
 
   const handleDeleteListing = async () => {
     try {
-      await deleteListing({ Id, auth });
+      await deleteListing({ id: Id, auth });
       console.log('Listing deleted');
       setId('');
     } catch (error) {
