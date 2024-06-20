@@ -17,8 +17,7 @@ function ListingPage() {
   const [updatePrice, setUpdatePrice] = useState('');
   const [updateQuantity, setUpdateQuantity] = useState('');
   const [updateImage, setUpdateImage] = useState(undefined);
-  const [updateCount, setUpdateCount] = useState(1);
-  const [deleteCount, setDeleteCount] = useState(1);
+  const [listingId, setListingId] = useState(''); // State to hold listing ID
   const navigate = useNavigate();
 
   const handleCreateListing = async () => {
@@ -38,23 +37,17 @@ function ListingPage() {
   }
 
   const handleUpdateListing = async () => {
-    if (updateCount < 1 || updateCount > 10) {
-      alert('Update count must be between 1 and 10');
-      return;
-    }
-    
     try {
-      for (let i = 0; i < updateCount; i++) {
-        const response = await updateListing({ 
-          title: updateTitle, 
-          description: updateDescription, 
-          price: updatePrice, 
-          quantity: updateQuantity, 
-          image: updateImage, 
-          auth,
-        });
-        console.log('Listing updated:', response);
-      }
+      const response = await updateListing({ 
+        id: listingId, // Pass the listingId to updateListing
+        title: updateTitle, 
+        description: updateDescription, 
+        price: updatePrice, 
+        quantity: updateQuantity, 
+        image: updateImage, 
+        auth,
+      });
+      console.log('Listing updated:', response);
 
       // Clear input fields after successful update
       setUpdateTitle('');
@@ -62,23 +55,16 @@ function ListingPage() {
       setUpdatePrice('');
       setUpdateQuantity('');
       setUpdateImage(undefined);
-      setUpdateCount(1);
+      setListingId(''); // Clear listingId after update
     } catch (error) {
       console.error('Error updating listing:', error);
     }
   }
 
   const handleDeleteListing = async () => {
-    if (deleteCount < 1 || deleteCount > 10) {
-      alert('Delete count must be between 1 and 10');
-      return;
-    }
-    
     try {
-      for (let i = 0; i < deleteCount; i++) {
-        await deleteListing({ auth });
-        console.log('Listing deleted');
-      }
+      await deleteListing({ auth });
+      console.log('Listing deleted');
     } catch (error) {
       console.error('Error deleting listing:', error);
     }
@@ -104,17 +90,16 @@ function ListingPage() {
 
       <div className="update-listing-form">
         <h2>Update Listing</h2>
+        <input onChange={e => setListingId(e.target.value)} type="text" name="listingId" placeholder="Enter Listing ID" value={listingId} />
         <input onChange={e => setUpdateTitle(e.target.value)} type="text" name="updateTitle" placeholder="Update Title" value={updateTitle} />
         <textarea onChange={e => setUpdateDescription(e.target.value)} name="updateDescription" placeholder="Update Description" value={updateDescription}></textarea>
         <input onChange={e => setUpdatePrice(e.target.value)} type="number" name="updatePrice" placeholder="Update Price" value={updatePrice} />
         <input onChange={e => setUpdateQuantity(e.target.value)} type="number" name="updateQuantity" placeholder="Update Quantity" value={updateQuantity} />
         <input onChange={e => setUpdateImage(e.target.files[0])} type="file" name="updateImage" accept="image/*" />
-        <input onChange={e => setUpdateCount(Number(e.target.value))} type="number" name="updateCount" placeholder="Number of Listings to Update (1-10)" min="1" max="10" value={updateCount} />
         <button className='Update-button' onClick={handleUpdateListing}>Update Listing</button>
       </div>
 
       <div className="delete-listing">
-        <input onChange={e => setDeleteCount(Number(e.target.value))} type="number" name="deleteCount" placeholder="Number of Listings to Delete (1-10)" min="1" max="10" />
         <button style={{background: 'red', backgroundColor: 'red'}} className='Delete-button' onClick={handleDeleteListing}>Delete Listing</button>
       </div>
     </div>
@@ -122,6 +107,7 @@ function ListingPage() {
 }
 
 export default ListingPage;
+
 
 
 
