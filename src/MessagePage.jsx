@@ -57,38 +57,53 @@ function MessagePage() {
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleMessageSend = async () => {
+  const handleMessageSend = () => {
     try {
-      const response = await createMessage({ content, image, receiver, auth });
-      console.log('Message sent:', response.data);
-      // Clear inputs after sending message
-      setContent('');
-      setImage(null);
-      setReceiver('');
+      createMessage({ content, image, receiver, auth })
+        .then(response => {
+          console.log('Message sent:', response.data);
+          // Clear inputs after sending message
+          setContent('');
+          setImage(null);
+          setReceiver('');
+        })
+        .catch(error => {
+          console.error('Error sending message:', error);
+        });
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
 
-  const handleUpdateMessage = async () => {
+  const handleUpdateMessage = () => {
     try {
-      const response = await updateMessage({ content: updateContent, image: updateImage, receiver, auth });
-      console.log('Message updated:', response.data);
-      // Clear inputs after updating message
-      setUpdateContent('');
-      setUpdateImage(null);
-      setReceiver('');
+      updateMessage({ content: updateContent, image: updateImage, receiver, auth })
+        .then(response => {
+          console.log('Message updated:', response.data);
+          // Clear inputs after updating message
+          setUpdateContent('');
+          setUpdateImage(null);
+          setReceiver('');
+        })
+        .catch(error => {
+          console.error('Error updating message:', error);
+        });
     } catch (error) {
       console.error('Error updating message:', error);
     }
   };
 
-  const handleDeleteMessage = async () => {
+  const handleDeleteMessage = () => {
     try {
-      const response = await deleteMessage({ receiver, auth });
-      console.log('Message deleted:', response.data);
-      // Clear receiver input after deleting message
-      setReceiver('');
+      deleteMessage({ receiver, auth })
+        .then(response => {
+          console.log('Message deleted:', response.data);
+          // Clear receiver input after deleting message
+          setReceiver('');
+        })
+        .catch(error => {
+          console.error('Error deleting message:', error);
+        });
     } catch (error) {
       console.error('Error deleting message:', error);
     }
