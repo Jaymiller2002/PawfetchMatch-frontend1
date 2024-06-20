@@ -27,6 +27,7 @@ function MessagePage() {
 
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isSending, setIsSending] = useState(false); // State to manage sending status
 
   useEffect(() => {
     if (!auth.accessToken) {
@@ -35,11 +36,19 @@ function MessagePage() {
   }, [auth.accessToken, navigate]);
 
   const handleMessageSend = async () => {
+    if (isSending) return; // Prevent sending multiple times
+    setIsSending(true); // Set sending status to true
+
     try {
       const response = await createMessage({ content, image, receiver, auth });
       console.log('Message sent:', response.data);
+      setContent(''); // Clear the message content after sending
+      setImage(null); // Clear the selected image after sending
+      setReceiver(''); // Reset receiver to default after sending
     } catch (error) {
       console.error('Error sending message:', error);
+    } finally {
+      setIsSending(false); // Reset sending status regardless of success or failure
     }
   };
 
@@ -99,7 +108,9 @@ function MessagePage() {
               ))}
             </select>
           </div>
-          <button onClick={handleMessageSend}>Send Message</button>
+          <button onClick={handleMessageSend} disabled={isSending}>
+            {isSending ? 'Sending...' : 'Send Message'}
+          </button>
         </div>
       </div>
 
@@ -141,6 +152,7 @@ function MessagePage() {
 }
 
 export default MessagePage;
+
 
 
 
