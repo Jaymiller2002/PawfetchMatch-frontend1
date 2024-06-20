@@ -11,7 +11,8 @@ function MessagePage() {
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
-  const [deleteReceiver, setDeleteReceiver] = useState('');
+  const [updateCount, setUpdateCount] = useState(1);
+  const [deleteCount, setDeleteCount] = useState(1);
   const [users] = useState([
     // Will have to update with each new user
     { id: 1, name: 'user 1'},
@@ -58,53 +59,42 @@ function MessagePage() {
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleMessageSend = () => {
+  const handleMessageSend = async () => {
     try {
-      createMessage({ content, image, receiver, auth })
-        .then(response => {
-          console.log('Message sent:', response.data);
-          // Clear inputs after sending message
-          setContent('');
-          setImage(null);
-          setReceiver('');
-        })
-        .catch(error => {
-          console.error('Error sending message:', error);
-        });
+      const response = await createMessage({ content, image, receiver, auth });
+      console.log('Message sent:', response.data);
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
 
-  const handleUpdateMessage = () => {
+  const handleUpdateMessage = async () => {
+    if (updateCount < 1 || updateCount > 10) {
+      alert('Update count must be between 1 and 10');
+      return;
+    }
+
     try {
-      updateMessage({ content: updateContent, image: updateImage, receiver, auth })
-        .then(response => {
-          console.log('Message updated:', response.data);
-          // Clear inputs after updating message
-          setUpdateContent('');
-          setUpdateImage(null);
-          setReceiver('');
-        })
-        .catch(error => {
-          console.error('Error updating message:', error);
-        });
+      for (let i = 0; i < updateCount; i++) {
+        const response = await updateMessage({ content: updateContent, image: updateImage, auth });
+        console.log('Message updated:', response.data);
+      }
     } catch (error) {
       console.error('Error updating message:', error);
     }
   };
 
-  const handleDeleteMessage = () => {
+  const handleDeleteMessage = async () => {
+    if (deleteCount < 1 || deleteCount > 10) {
+      alert('Delete count must be between 1 and 10');
+      return;
+    }
+
     try {
-      deleteMessage({ receiver: deleteReceiver, auth })
-        .then(response => {
-          console.log('Message deleted:', response.data);
-          // Clear receiver input after deleting message
-          setDeleteReceiver('');
-        })
-        .catch(error => {
-          console.error('Error deleting message:', error);
-        });
+      for (let i = 0; i < deleteCount; i++) {
+        const response = await deleteMessage({ auth });
+        console.log('Message deleted:', response.data);
+      }
     } catch (error) {
       console.error('Error deleting message:', error);
     }
@@ -140,7 +130,7 @@ function MessagePage() {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor="receiver">Select Receiver:</label>
+            <label htmlFor="receiver"></label>
             <select
               id="receiver"
               value={receiver}
@@ -149,7 +139,7 @@ function MessagePage() {
               <option value="">Select Receiver</option>
               {users.map(user => (
                 <option key={user.id} value={user.id}>
-                  {user.name}
+                  {user.name} ({user.id})
                 </option>
               ))}
             </select>
@@ -159,7 +149,7 @@ function MessagePage() {
       </div>
 
       <div className='update-message-container'>
-        <h1>Select Message to Update</h1>
+        <h1>Update Message</h1>
         <div className='form-container update-message-form'>
           <div className='form-group'>
             <label htmlFor="updateContent">Update Content:</label>
@@ -179,6 +169,17 @@ function MessagePage() {
               onChange={(e) => setUpdateImage(e.target.files[0])}
             />
           </div>
+          <div className='form-group'>
+            <label htmlFor="updateCount">Number of Messages to Update (1-10):</label>
+            <input
+              type="number"
+              id="updateCount"
+              value={updateCount}
+              onChange={(e) => setUpdateCount(Number(e.target.value))}
+              min="1"
+              max="10"
+            />
+          </div>
           <button onClick={handleUpdateMessage}>Update Message</button>
         </div>
       </div>
@@ -186,9 +187,18 @@ function MessagePage() {
       <div>
         <GetMessages />
       </div>
-
       <div className='delete-message-container'>
-        <h1>Select Message to Delete</h1>
+        <div className='form-group'>
+          <label htmlFor="deleteCount">Number of Messages to Delete (1-10):</label>
+          <input
+            type="number"
+            id="deleteCount"
+            value={deleteCount}
+            onChange={(e) => setDeleteCount(Number(e.target.value))}
+            min="1"
+            max="10"
+          />
+        </div>
         <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
       </div>
     </div>
@@ -196,9 +206,6 @@ function MessagePage() {
 }
 
 export default MessagePage;
-
-
-
 
 
 
