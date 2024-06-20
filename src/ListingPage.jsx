@@ -63,8 +63,9 @@ function ListingPage() {
 
   const handleDeleteListing = async () => {
     try {
-      await deleteListing({ auth });
+      await deleteListing({ Id, auth });
       console.log('Listing deleted');
+      setId('');
     } catch (error) {
       console.error('Error deleting listing:', error);
     }
@@ -100,6 +101,7 @@ function ListingPage() {
       </div>
 
       <div className="delete-listing">
+        <input onChange={e => setId(e.target.value)} type="text" name="id" placeholder="Enter ID" value={Id} />
         <button style={{background: 'red', backgroundColor: 'red'}} className='Delete-button' onClick={handleDeleteListing}>Delete Listing</button>
       </div>
     </div>
