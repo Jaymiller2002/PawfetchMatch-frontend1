@@ -4,7 +4,7 @@ import { AuthContext } from './context';
 import './ListingPage.css';
 import { useNavigate } from 'react-router-dom';
 
-function ListingPage() {
+function ListingPage({ listings }) {
   const { auth } = useContext(AuthContext);
   const [createdListing, setCreatedListing] = useState(null);
   const [title, setTitle] = useState('');
@@ -17,7 +17,6 @@ function ListingPage() {
   const [updatePrice, setUpdatePrice] = useState('');
   const [updateQuantity, setUpdateQuantity] = useState('');
   const [updateImage, setUpdateImage] = useState(undefined);
-  const [listingId, setListingId] = useState(''); // State to hold listing ID
   const navigate = useNavigate();
 
   const handleCreateListing = async () => {
@@ -37,9 +36,16 @@ function ListingPage() {
   }
 
   const handleUpdateListing = async () => {
+    if (listings.length === 0) {
+      console.error('No listings available to update');
+      return;
+    }
+
+    const firstListingId = listings[0].id;
+
     try {
       const response = await updateListing({ 
-        id: listingId, // Pass the listingId to updateListing
+        id: firstListingId, // Use the first listing's ID
         title: updateTitle, 
         description: updateDescription, 
         price: updatePrice, 
@@ -55,15 +61,21 @@ function ListingPage() {
       setUpdatePrice('');
       setUpdateQuantity('');
       setUpdateImage(undefined);
-      setListingId(''); // Clear listingId after update
     } catch (error) {
       console.error('Error updating listing:', error);
     }
   }
 
   const handleDeleteListing = async () => {
+    if (listings.length === 0) {
+      console.error('No listings available to delete');
+      return;
+    }
+
+    const firstListingId = listings[0].id;
+
     try {
-      await deleteListing({ auth });
+      await deleteListing({ id: firstListingId, auth }); // Pass the first listing's ID
       console.log('Listing deleted');
     } catch (error) {
       console.error('Error deleting listing:', error);
@@ -90,7 +102,6 @@ function ListingPage() {
 
       <div className="update-listing-form">
         <h2>Update Listing</h2>
-        <input onChange={e => setListingId(e.target.value)} type="text" name="listingId" placeholder="Enter Listing ID" value={listingId} />
         <input onChange={e => setUpdateTitle(e.target.value)} type="text" name="updateTitle" placeholder="Update Title" value={updateTitle} />
         <textarea onChange={e => setUpdateDescription(e.target.value)} name="updateDescription" placeholder="Update Description" value={updateDescription}></textarea>
         <input onChange={e => setUpdatePrice(e.target.value)} type="number" name="updatePrice" placeholder="Update Price" value={updatePrice} />
