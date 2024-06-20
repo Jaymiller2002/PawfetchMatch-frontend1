@@ -242,7 +242,7 @@ export const createMessage = ({ sender, receiver, content, image, auth}) => {
     },
   }).then(response => {
     console.log("CREATED MESSAGE: ", response)
-    return response
+    return response.data
   }).catch(error => {
     console.log("ERROR CREATING MESSAGE: ", error)
   })
@@ -265,7 +265,7 @@ export const updateMessage = ({ content, image, auth }) => {
   })
   .then(response => {
     console.log("Message updated:", response.data);
-    return response;
+    return response.data;
   })
   .catch(error => {
     console.error("Error updating message:", error);
@@ -284,7 +284,7 @@ export const deleteMessage = ({ auth }) => {
   })
   .then(response => {
     console.log("Message deleted:", response.data);
-    return response;
+    return response.data;
   })
   .catch(error => {
     console.error("Error deleting message:", error);
