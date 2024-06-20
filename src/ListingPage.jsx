@@ -25,6 +25,13 @@ function ListingPage() {
     try {
       const response = await createListing({ title, description, price, quantity, image, auth });
       setCreatedListing(response.data);
+
+      // Clear input fields after successful creation
+      setTitle('');
+      setDescription('');
+      setPrice('');
+      setQuantity('');
+      setImage(undefined);
     } catch (error) {
       console.error('Error creating listing:', error);
     }
@@ -48,6 +55,14 @@ function ListingPage() {
         });
         console.log('Listing updated:', response);
       }
+
+      // Clear input fields after successful update
+      setUpdateTitle('');
+      setUpdateDescription('');
+      setUpdatePrice('');
+      setUpdateQuantity('');
+      setUpdateImage(undefined);
+      setUpdateCount(1);
     } catch (error) {
       console.error('Error updating listing:', error);
     }
@@ -79,22 +94,22 @@ function ListingPage() {
     <div className="listing-container">
       <div className="create-listing-form">
         <h2>Create Listing</h2>
-        <input onChange={e => setTitle(e.target.value)} type="text" name="title" placeholder="Title" />
-        <textarea onChange={e => setDescription(e.target.value)} name="description" placeholder="Description"></textarea>
-        <input onChange={e => setPrice(e.target.value)} type="number" name="price" placeholder="Price" />
-        <input onChange={e => setQuantity(e.target.value)} type="number" name="quantity" placeholder="Quantity" />
+        <input onChange={e => setTitle(e.target.value)} type="text" name="title" placeholder="Title" value={title} />
+        <textarea onChange={e => setDescription(e.target.value)} name="description" placeholder="Description" value={description}></textarea>
+        <input onChange={e => setPrice(e.target.value)} type="number" name="price" placeholder="Price" value={price} />
+        <input onChange={e => setQuantity(e.target.value)} type="number" name="quantity" placeholder="Quantity" value={quantity} />
         <input onChange={e => setImage(e.target.files[0])} type="file" name="image" accept="image/*" />
         <button className='Create-button' onClick={handleCreateListing}>Create Listing</button>
       </div>
 
       <div className="update-listing-form">
         <h2>Update Listing</h2>
-        <input onChange={e => setUpdateTitle(e.target.value)} type="text" name="updateTitle" placeholder="Update Title" />
-        <textarea onChange={e => setUpdateDescription(e.target.value)} name="updateDescription" placeholder="Update Description"></textarea>
-        <input onChange={e => setUpdatePrice(e.target.value)} type="number" name="updatePrice" placeholder="Update Price" />
-        <input onChange={e => setUpdateQuantity(e.target.value)} type="number" name="updateQuantity" placeholder="Update Quantity" />
+        <input onChange={e => setUpdateTitle(e.target.value)} type="text" name="updateTitle" placeholder="Update Title" value={updateTitle} />
+        <textarea onChange={e => setUpdateDescription(e.target.value)} name="updateDescription" placeholder="Update Description" value={updateDescription}></textarea>
+        <input onChange={e => setUpdatePrice(e.target.value)} type="number" name="updatePrice" placeholder="Update Price" value={updatePrice} />
+        <input onChange={e => setUpdateQuantity(e.target.value)} type="number" name="updateQuantity" placeholder="Update Quantity" value={updateQuantity} />
         <input onChange={e => setUpdateImage(e.target.files[0])} type="file" name="updateImage" accept="image/*" />
-        <input onChange={e => setUpdateCount(Number(e.target.value))} type="number" name="updateCount" placeholder="Number of Listings to Update (1-10)" min="1" max="10" />
+        <input onChange={e => setUpdateCount(Number(e.target.value))} type="number" name="updateCount" placeholder="Number of Listings to Update (1-10)" min="1" max="10" value={updateCount} />
         <button className='Update-button' onClick={handleUpdateListing}>Update Listing</button>
       </div>
 
