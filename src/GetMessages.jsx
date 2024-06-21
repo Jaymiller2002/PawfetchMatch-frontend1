@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from './context';
 import { getMessages } from './api'; // Assuming getMessages function is defined in api.js
 import { useNavigate } from 'react-router-dom';
-import './GetMessages.css';
+import './GetMessages.css'
 import { baseUrl } from './api';
 
 function GetMessages() {
@@ -11,25 +11,23 @@ function GetMessages() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (auth.accessToken) {
-          try {
-              const response = await getMessages({ auth });
-              console.log("Got Messages: ", response);
-              setMessages(response.data); // Assuming response.data contains the messages
-          } catch (error) {
-              console.error('Error fetching messages:', error);
-          }
-      }
-    };
+    fetchData();
+    // Polling for updates every 10 seconds
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
+  }, [auth.accessToken]);
 
+  const fetchData = async () => {
     if (auth.accessToken) {
-      fetchData(); // Initial fetch
-      const interval = setInterval(fetchData, 5000); // Polling for updates every 5 seconds
-
-      return () => clearInterval(interval); // Cleanup interval on unmount
+        try {
+            const response = await getMessages({ auth });
+            console.log("Got Messages: ", response)
+            setMessages(response.data); // Assuming response.data contains the messages
+        } catch (error) {
+            console.error('Error fetching messages:', error);
+        }
     }
-  }, [auth.accessToken]); // Run the effect when accessToken changes
+  };
 
   useEffect(() => {
     if (!auth.accessToken) {
@@ -45,7 +43,7 @@ function GetMessages() {
         <div key={message.id} className="message">
           <div className='message-sender'>Sender: {message.sender}</div>
           <div className='message-content'>Content: {message.content}</div>
-          <img src={`${baseUrl}${message.image}`} alt="Message Image" className='message-image' />
+          <img src={`${baseUrl}${message.image}`} alt="Message Image" className='message-image'/>
         </div>
       ))}
     </div>
