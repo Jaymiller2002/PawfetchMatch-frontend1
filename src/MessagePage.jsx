@@ -11,10 +11,7 @@ function MessagePage() {
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
-  const [updateReceiver, setUpdateReceiver] = useState('');
-  const [deleteReceiver, setDeleteReceiver] = useState('');
   const [users] = useState([
-    // Will have to update with each new user
     { id: 1, name: 'Jay Miller' },
     { id: 2, name: 'Jay Miller' },
     { id: 3, name: 'Jay Miller' },
@@ -57,7 +54,7 @@ function MessagePage() {
 
   const handleUpdateMessage = async () => {
     try {
-      const response = await updateMessage({ content: updateContent, image: updateImage, sender: updateSender, auth });
+      const response = await updateMessage({ content: updateContent, image: updateImage, auth });
       console.log('Message updated:', response.data);
     } catch (error) {
       console.error('Error updating message:', error);
@@ -66,7 +63,7 @@ function MessagePage() {
 
   const handleDeleteMessage = async () => {
     try {
-      const response = await deleteMessage({ receiver: deleteSender, auth });
+      const response = await deleteMessage({ auth });
       console.log('Message deleted:', response.data);
     } catch (error) {
       console.error('Error deleting message:', error);
@@ -103,7 +100,7 @@ function MessagePage() {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor="receiver">Receiver:</label>
+            <label htmlFor="receiver"></label>
             <select
               id="receiver"
               value={receiver}
@@ -142,44 +139,14 @@ function MessagePage() {
               onChange={(e) => setUpdateImage(e.target.files[0])}
             />
           </div>
-          <div className='form-group'>
-            <label htmlFor="updateReceiver">Sender:</label>
-            <select
-              id="updateReceiver"
-              value={updateSender}
-              onChange={(e) => setUpdateSender(e.target.value)}
-            >
-              <option value="">Update Message:</option>
-              {users.map(user => (
-                <option key={user.id} value={user.id}>
-                  {user.name} ({user.id})
-                </option>
-              ))}
-            </select>
-          </div>
           <button onClick={handleUpdateMessage}>Update Message</button>
         </div>
       </div>
 
-      <div className='delete-message-container'>
+      <div>
         <GetMessages />
-        <div className='form-group'>
-          <label htmlFor="deleteReceiver">Sender:</label>
-          <select
-            id="deleteReceiver"
-            value={deleteSender}
-            onChange={(e) => setDeleteSender(e.target.value)}
-          >
-            <option value="">Select Message</option>
-            {users.map(user => (
-              <option key={user.id} value={user.id}>
-                {user.name} ({user.id})
-              </option>
-            ))}
-          </select>
-        </div>
-        <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
       </div>
+      <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
     </div>
   );
 }
