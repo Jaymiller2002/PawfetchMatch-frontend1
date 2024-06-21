@@ -11,8 +11,9 @@ function MessagePage() {
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
-  const [users] = useState([
-    // Will have to update with each new user
+  const [selectedMessage, setSelectedMessage] = useState(null); // State to hold the selected message
+  const [users, setUsers] = useState([
+    // Initial list of users
     { id: 1, name: 'Jay Miller'},
     { id: 2, name: 'Jay Miller'},
     { id: 3, name: 'Jay Miller'},
@@ -55,7 +56,18 @@ function MessagePage() {
 
   const handleUpdateMessage = async () => {
     try {
-      const response = await updateMessage({ content: updateContent, image: updateImage, auth });
+      if (!selectedMessage) {
+        console.error('Please select a message to update.');
+        return;
+      }
+      
+      const response = await updateMessage({
+        messageId: selectedMessage.id,
+        content: updateContent,
+        image: updateImage,
+        auth
+      });
+      
       console.log('Message updated:', response.data);
     } catch (error) {
       console.error('Error updating message:', error);
@@ -64,7 +76,12 @@ function MessagePage() {
 
   const handleDeleteMessage = async () => {
     try {
-      const response = await deleteMessage({ auth });
+      if (!selectedMessage) {
+        console.error('Please select a message to delete.');
+        return;
+      }
+      
+      const response = await deleteMessage({ messageId: selectedMessage.id, auth });
       console.log('Message deleted:', response.data);
     } catch (error) {
       console.error('Error deleting message:', error);
@@ -76,6 +93,12 @@ function MessagePage() {
       navigate('/login');
     }
   }, [auth.accessToken, navigate]);
+
+  const handleSelectMessage = (message) => {
+    setSelectedMessage(message);
+    setUpdateContent(message.content); // Pre-fill update content with selected message content
+    // You can choose to pre-fill other fields such as image here if needed
+  };
 
   return (
     <div className='message-page-container'>
@@ -101,7 +124,7 @@ function MessagePage() {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor="receiver"></label>
+            <label htmlFor="receiver">Receiver:</label>
             <select
               id="receiver"
               value={receiver}
@@ -140,6 +163,10 @@ function MessagePage() {
               onChange={(e) => setUpdateImage(e.target.files[0])}
             />
           </div>
+          <div className='form-group'>
+            <label>Select Message to Update:</label>
+            <GetMessages onSelect={handleSelectMessage} /> {/* Pass onSelect prop to GetMessages component */}
+          </div>
           <button onClick={handleUpdateMessage}>Update Message</button>
         </div>
       </div>
@@ -153,6 +180,7 @@ function MessagePage() {
 }
 
 export default MessagePage;
+
 
 
 
