@@ -52,47 +52,6 @@
 
 // export default GetMessages;
 
-import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from './context';
-import { getMessages } from './messagesApi';
 
-const GetMessages = () => {
-  const [messages, setMessages] = useState([]);
-  const { auth } = useContext(AuthContext);
-
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const messagesData = await getMessages(auth.accessToken);
-        setMessages(messagesData);
-        console.log('Messages retrieved:', messagesData);
-      } catch (error) {
-        console.error('Error fetching messages:', error);
-      }
-    };
-
-    if (auth.accessToken) {
-      fetchMessages();
-    }
-  }, [auth.accessToken]);
-
-  return (
-    <div className="messages-container">
-      <h2>Messages</h2>
-      <ul>
-        {messages.map(message => (
-          <li key={message.id}>
-            <strong>Sender:</strong> {message.sender_name}<br />
-            <strong>Receiver:</strong> {message.receiver_name}<br />
-            <strong>Content:</strong> {message.content}<br />
-            {message.image && <img src={message.image} alt="wont push my changes like a douche" />}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-export default GetMessages;
 
 
