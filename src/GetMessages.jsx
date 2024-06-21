@@ -11,7 +11,7 @@ function GetMessages() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
     // Polling for updates every 10 seconds
     const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
