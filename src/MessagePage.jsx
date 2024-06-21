@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { createMessage, updateMessage, deleteMessage } from './api';
-import { AuthContext } from './context';
+import { createMessage, updateMessage, deleteMessage } from './api'; // Assuming you have API functions defined in './api'
+import { AuthContext } from './context'; // Assuming you have an AuthContext defined in './context'
 import { useNavigate } from 'react-router-dom';
-import GetMessages from './GetMessages';
-import './MessagePage.css';
+import GetMessages from './GetMessages'; // Assuming you have a component for displaying messages defined in './GetMessages'
+import './MessagePage.css'; // Assuming you have CSS styles defined in './MessagePage.css'
 
 function MessagePage() {
   const [content, setContent] = useState('');
@@ -47,21 +47,21 @@ function MessagePage() {
     { id: 39, name: 'Jay Miller' },
     { id: 40, name: 'Jay Miller' },
   ]);
-  const { auth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext); // Assuming AuthContext provides authentication details like accessToken
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!auth.accessToken) {
-      navigate('/login');
+      navigate('/login'); // Redirect to login if accessToken is not available
     }
   }, [auth.accessToken, navigate]);
 
   const handleMessageSend = async () => {
     try {
       const response = await createMessage({ content, image, receiver, auth });
-      console.log('Message sent:', response.data);
+      console.log('Message sent:', response.data); // Log successful message sending
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error('Error sending message:', error); // Log error if message sending fails
     }
   };
 
@@ -72,10 +72,15 @@ function MessagePage() {
     }
 
     try {
-      const response = await updateMessage({ id: selectedMessage.id, content: updateContent, image: updateImage, auth });
-      console.log('Message updated:', response.data);
+      const response = await updateMessage({
+        id: selectedMessage.id,
+        content: updateContent,
+        image: updateImage,
+        auth
+      });
+      console.log('Message updated:', response.data); // Log successful message update
     } catch (error) {
-      console.error('Error updating message:', error);
+      console.error('Error updating message:', error); // Log error if message update fails
     }
   };
 
@@ -86,10 +91,13 @@ function MessagePage() {
     }
 
     try {
-      const response = await deleteMessage({ id: selectedMessage.id, auth });
-      console.log('Message deleted:', response.data);
+      const response = await deleteMessage({
+        id: selectedMessage.id,
+        auth
+      });
+      console.log('Message deleted:', response.data); // Log successful message deletion
     } catch (error) {
-      console.error('Error deleting message:', error);
+      console.error('Error deleting message:', error); // Log error if message deletion fails
     }
   };
 
@@ -179,7 +187,7 @@ function MessagePage() {
       </div>
 
       <div>
-        <GetMessages />
+        <GetMessages /> {/* Assuming GetMessages component displays the list of messages */}
       </div>
       <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
     </div>
