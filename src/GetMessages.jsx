@@ -22,7 +22,7 @@ function GetMessages() {
         try {
             const response = await getMessages({ auth });
             console.log("Got Messages: ", response)
-            setMessages(response); // Assuming response.data contains the messages
+            setMessages(response.data); // Assuming response.data contains the messages
         } catch (error) {
             console.error('Error fetching messages:', error);
         }
