@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { createMessage, updateMessage, deleteMessage } from './api';
 import { AuthContext } from './context';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import GetMessages from './GetMessages';
 import './MessagePage.css';
 
@@ -46,19 +46,16 @@ function MessagePage() {
   ]);
   
   const { auth } = useContext(AuthContext);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!auth.accessToken) {
-      navigate('/login');
-    }
-  }, [auth.accessToken, navigate]);
+  // useEffect(() => {
+  //   if (!auth.accessToken) {
+  //     navigate('/login');
+  //   }
+  // }, [auth.accessToken, navigate]);
 
   const handleMessageSend = () => {
     try {
-      // Set sending status directly
-      // This prevents multiple submissions
-      // No need for useRef or additional state
       createMessage({ content, image, receiver, auth });
       console.log('Message sent');
       setContent('');
