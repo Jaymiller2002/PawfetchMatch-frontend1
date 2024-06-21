@@ -76,11 +76,16 @@ function MessagePage() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    handleMessageSend(); // Handle form submission manually
+  };
+
   return (
     <div className='message-page-container'>
       <div className='send-message-container'>
         <h1>Send Message</h1>
-        <div className='form-container create-message-form' onSubmit={handleMessageSend}>
+        <div className='form-container create-message-form'>
           <div className='form-group'>
             <label htmlFor="content">Message Content:</label>
             <textarea
@@ -114,7 +119,7 @@ function MessagePage() {
               ))}
             </select>
           </div>
-          <button type="submit">Send Message</button>
+          <button onClick={handleSubmit}>Send Message</button>
         </div>
       </div>
 
