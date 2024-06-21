@@ -54,10 +54,10 @@ function MessagePage() {
   //   }
   // }, [auth.accessToken, navigate]);
 
-  const handleMessageSend = () => {
+  const handleMessageSend = async () => {
     try {
-      createMessage({ content, image, receiver, auth });
-      console.log('Message sent');
+      const response = await createMessage({ content, image, receiver, auth });
+      console.log('Message sent', response);
       // setContent('');
       // setImage(null);
       // setReceiver('');
