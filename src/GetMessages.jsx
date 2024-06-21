@@ -6,7 +6,7 @@ import './GetMessages.css'
 import { baseUrl } from './api';
 
 function GetMessages() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(null);
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
