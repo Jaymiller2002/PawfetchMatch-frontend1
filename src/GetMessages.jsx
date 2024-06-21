@@ -11,7 +11,7 @@ function GetMessages() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // fetchData();
+    fetchData();
     // Polling for updates every 10 seconds
     const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
@@ -22,7 +22,7 @@ function GetMessages() {
         try {
             const response = await getMessages({ auth });
             console.log("Got Messages: ", response)
-            setMessages(response.data); // Assuming response.data contains the messages
+            setMessages(response.data[0]); // Assuming response.data contains the messages
         } catch (error) {
             console.error('Error fetching messages:', error);
         }
