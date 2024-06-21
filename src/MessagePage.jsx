@@ -13,15 +13,11 @@ function MessagePage() {
   const [updateImage, setUpdateImage] = useState(null);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [users] = useState([
-    { id: 1, name: 'Jay Miller' },
     { id: 2, name: 'Jay Miller' },
     { id: 3, name: 'Jay Miller' },
-    { id: 4, name: 'Jay Miller' },
-    { id: 5, name: 'Jay Miller' },
-    { id: 6, name: 'Jay Miller' },
-    { id: 7, name: 'Jay Miller' },
-    { id: 8, name: 'Jay Miller' },
-    { id: 9, name: 'Jay Miller' },
+    { id: 5, name: 'Morgan Miller' },
+    { id: 6, name: 'Kailey Miller' },
+    { id: 7, name: 'DeeAnn Miller' },
     { id: 10, name: 'Jay Miller' },
     { id: 11, name: 'Reece' },
     { id: 14, name: 'Vader' },
@@ -40,6 +36,16 @@ function MessagePage() {
     { id: 28, name: 'User 28' },
     { id: 29, name: 'User 29' },
     { id: 30, name: 'User 30' },
+    { id: 31, name: 'Jay Miller' },
+    { id: 32, name: 'Jay Miller' },
+    { id: 33, name: 'Jay Miller' },
+    { id: 34, name: 'Jay Miller' },
+    { id: 35, name: 'Jay Miller' },
+    { id: 36, name: 'Jay Miller' },
+    { id: 37, name: 'Jay Miller' },
+    { id: 38, name: 'Jay Miller' },
+    { id: 39, name: 'Jay Miller' },
+    { id: 40, name: 'Jay Miller' },
   ]);
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
