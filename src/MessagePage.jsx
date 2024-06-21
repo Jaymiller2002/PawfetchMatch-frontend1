@@ -145,7 +145,7 @@ function MessagePage() {
       </div>
 
       <div>
-        {/* <GetMessages /> */}
+        <GetMessages />
       </div>
       <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
     </div>
