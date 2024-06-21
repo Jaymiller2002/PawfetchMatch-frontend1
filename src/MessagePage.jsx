@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { createMessage, updateMessage, deleteMessage } from './api';
 import { AuthContext } from './context';
+import { useNavigate } from 'react-router-dom';
 import GetMessages from './GetMessages';
 import './MessagePage.css';
 
@@ -11,48 +12,42 @@ function MessagePage() {
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
   const [users] = useState([
-    { id: 1, name: 'user 1' },
-    { id: 2, name: 'Jason Mize' },
-    { id: 3, name: 'Jay Miller' },
-    { id: 4, name: 'user 4' },
-    { id: 5, name: 'Morgan Miller' },
-    { id: 6, name: 'Kailey Miller' },
-    { id: 7, name: 'DeeAnn Miller' },
-    { id: 8, name: 'user 8' },
-    { id: 9, name: 'user 9' },
-    { id: 10, name: 'user 10' },
-    { id: 11, name: 'user 11' },
-    { id: 12, name: 'user 12' },
-    { id: 13, name: 'user 13' },
-    { id: 14, name: 'user 14' },
-    { id: 15, name: 'user 15' },
-    { id: 16, name: 'user 16' },
-    { id: 17, name: 'user 17' },
-    { id: 18, name: 'user 18' },
-    { id: 19, name: 'user 19' },
-    { id: 20, name: 'user 20' },
-    { id: 21, name: 'user 21' },
-    { id: 22, name: 'user 22' },
-    { id: 23, name: 'user 23' },
-    { id: 24, name: 'user 24' },
-    { id: 25, name: 'user 25' },
-    { id: 26, name: 'user 26' },
-    { id: 27, name: 'user 27' },
-    { id: 28, name: 'user 28' },
-    { id: 29, name: 'user 29' },
-    { id: 30, name: 'user 30' },
-    // Other users
+    // Will have to update with each new user
+    { id: 1, name: 'Jay Miller'},
+    { id: 2, name: 'Jay Miller'},
+    { id: 3, name: 'Jay Miller'},
+    { id: 4, name: 'Jay Miller'},
+    { id: 5, name: 'Jay Miller'},
+    { id: 6, name: 'Jay Miller'},
+    { id: 7, name: 'Jay Miller'},
+    { id: 8, name: 'Jay Miller'},
+    { id: 9, name: 'Jay Miller'},
+    { id: 10, name: 'Jay Miller'},
+    { id: 11, name: 'Reece' },
+    { id: 14, name: 'Vader' },
+    { id: 15, name: 'Luke' },
+    { id: 17, name: 'User 17' },
+    { id: 18, name: 'User 18' },
+    { id: 19, name: 'User 19' },
+    { id: 20, name: 'User 20' },
+    { id: 21, name: 'User 21' },
+    { id: 22, name: 'User 22' },
+    { id: 23, name: 'User 23' },
+    { id: 24, name: 'User 24' },
+    { id: 25, name: 'User 25' },
+    { id: 26, name: 'User 26' },
+    { id: 27, name: 'User 27' },
+    { id: 28, name: 'User 28' },
+    { id: 29, name: 'User 29' },
+    { id: 30, name: 'User 30' },
   ]);
-
   const { auth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleMessageSend = async () => {
     try {
       const response = await createMessage({ content, image, receiver, auth });
-      console.log('Message sent', response);
-      setContent('');
-      setImage(null);
-      setReceiver('');
+      console.log('Message sent:', response.data);
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -76,10 +71,11 @@ function MessagePage() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    handleMessageSend(); // Handle form submission manually
-  };
+  useEffect(() => {
+    if (!auth.accessToken) {
+      navigate('/login');
+    }
+  }, [auth.accessToken, navigate]);
 
   return (
     <div className='message-page-container'>
@@ -105,7 +101,7 @@ function MessagePage() {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor="receiver">Receiver:</label>
+            <label htmlFor="receiver"></label>
             <select
               id="receiver"
               value={receiver}
@@ -114,12 +110,12 @@ function MessagePage() {
               <option value="">Select Receiver</option>
               {users.map(user => (
                 <option key={user.id} value={user.id}>
-                  {user.name}
+                  {user.name} ({user.id})
                 </option>
               ))}
             </select>
           </div>
-          <button onClick={handleSubmit}>Send Message</button>
+          <button onClick={handleMessageSend}>Send Message</button>
         </div>
       </div>
 
@@ -151,11 +147,7 @@ function MessagePage() {
       <div>
         <GetMessages />
       </div>
-
-      <div className='delete-message-container'>
-        <h1>Delete Message</h1>
-        <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
-      </div>
+      <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
     </div>
   );
 }
