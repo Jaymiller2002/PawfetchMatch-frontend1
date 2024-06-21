@@ -58,9 +58,9 @@ function MessagePage() {
     try {
       createMessage({ content, image, receiver, auth });
       console.log('Message sent');
-      setContent('');
-      setImage(null);
-      setReceiver('');
+      // setContent('');
+      // setImage(null);
+      // setReceiver('');
     } catch (error) {
       console.error('Error sending message:', error);
     }
