@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { createMessage, updateMessage, deleteMessage } from './api';
 import { AuthContext } from './context';
-// import { useNavigate } from 'react-router-dom';
 import GetMessages from './GetMessages';
 import './MessagePage.css';
 
@@ -44,23 +43,17 @@ function MessagePage() {
     { id: 30, name: 'user 30' },
     // Other users
   ]);
-  
+
   const { auth } = useContext(AuthContext);
-  // const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (!auth.accessToken) {
-  //     navigate('/login');
-  //   }
-  // }, [auth.accessToken, navigate]);
-
-  const handleMessageSend = async () => {
+  const handleMessageSend = async (e) => {
+    e.preventDefault(); // Prevent default form submission if using a form
     try {
       const response = await createMessage({ content, image, receiver, auth });
       console.log('Message sent', response);
-      // setContent('');
-      // setImage(null);
-      // setReceiver('');
+      setContent('');
+      setImage(null);
+      setReceiver('');
     } catch (error) {
       console.error('Error sending message:', error);
     }
@@ -88,7 +81,7 @@ function MessagePage() {
     <div className='message-page-container'>
       <div className='send-message-container'>
         <h1>Send Message</h1>
-        <div className='form-container create-message-form'>
+        <form className='form-container create-message-form' onSubmit={handleMessageSend}>
           <div className='form-group'>
             <label htmlFor="content">Message Content:</label>
             <textarea
@@ -122,8 +115,8 @@ function MessagePage() {
               ))}
             </select>
           </div>
-          <button onClick={handleMessageSend}>Send Message</button>
-        </div>
+          <button type="submit">Send Message</button>
+        </form>
       </div>
 
       <div className='update-message-container'>
@@ -164,6 +157,7 @@ function MessagePage() {
 }
 
 export default MessagePage;
+
 
 
 
