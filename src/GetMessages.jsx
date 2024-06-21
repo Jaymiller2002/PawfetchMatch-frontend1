@@ -85,7 +85,7 @@ const GetMessages = () => {
             <strong>Sender:</strong> {message.sender_name}<br />
             <strong>Receiver:</strong> {message.receiver_name}<br />
             <strong>Content:</strong> {message.content}<br />
-            {message.image && <img src={message.image} alt="Attfuck this dogshitasssmesaageboradached" />}
+            {message.image && <img src={message.image} alt="wont push my changes like a douche" />}
           </li>
         ))}
       </ul>
