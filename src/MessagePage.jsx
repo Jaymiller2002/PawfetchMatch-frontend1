@@ -11,6 +11,7 @@ function MessagePage() {
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
+  const [selectedMessage, setSelectedMessage] = useState(null);
   const [users] = useState([
     { id: 1, name: 'Jay Miller' },
     { id: 2, name: 'Jay Miller' },
@@ -43,6 +44,12 @@ function MessagePage() {
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!auth.accessToken) {
+      navigate('/login');
+    }
+  }, [auth.accessToken, navigate]);
+
   const handleMessageSend = async () => {
     try {
       const response = await createMessage({ content, image, receiver, auth });
@@ -53,8 +60,13 @@ function MessagePage() {
   };
 
   const handleUpdateMessage = async () => {
+    if (!selectedMessage) {
+      console.error('No message selected for update');
+      return;
+    }
+
     try {
-      const response = await updateMessage({ content: updateContent, image: updateImage, auth });
+      const response = await updateMessage({ id: selectedMessage.id, content: updateContent, image: updateImage, auth });
       console.log('Message updated:', response.data);
     } catch (error) {
       console.error('Error updating message:', error);
@@ -62,19 +74,18 @@ function MessagePage() {
   };
 
   const handleDeleteMessage = async () => {
+    if (!selectedMessage) {
+      console.error('No message selected for deletion');
+      return;
+    }
+
     try {
-      const response = await deleteMessage({ auth });
+      const response = await deleteMessage({ id: selectedMessage.id, auth });
       console.log('Message deleted:', response.data);
     } catch (error) {
       console.error('Error deleting message:', error);
     }
   };
-
-  useEffect(() => {
-    if (!auth.accessToken) {
-      navigate('/login');
-    }
-  }, [auth.accessToken, navigate]);
 
   return (
     <div className='message-page-container'>
@@ -100,7 +111,7 @@ function MessagePage() {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor="receiver"></label>
+            <label htmlFor="receiver">Receiver:</label>
             <select
               id="receiver"
               value={receiver}
@@ -138,6 +149,24 @@ function MessagePage() {
               accept="image/*"
               onChange={(e) => setUpdateImage(e.target.files[0])}
             />
+          </div>
+          <div className='form-group'>
+            <label htmlFor="selectedMessage">Select Message to Update:</label>
+            <select
+              id="selectedMessage"
+              value={selectedMessage ? selectedMessage.id : ''}
+              onChange={(e) => {
+                const selected = users.find(user => user.id === parseInt(e.target.value));
+                setSelectedMessage(selected);
+              }}
+            >
+              <option value="">Select Message</option>
+              {users.map(user => (
+                <option key={user.id} value={user.id}>
+                  {user.name} ({user.id})
+                </option>
+              ))}
+            </select>
           </div>
           <button onClick={handleUpdateMessage}>Update Message</button>
         </div>
