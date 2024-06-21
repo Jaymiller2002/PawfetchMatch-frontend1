@@ -46,8 +46,7 @@ function MessagePage() {
 
   const { auth } = useContext(AuthContext);
 
-  const handleMessageSend = async (e) => {
-    e.preventDefault(); // Prevent default form submission if using a form
+  const handleMessageSend = async () => {
     try {
       const response = await createMessage({ content, image, receiver, auth });
       console.log('Message sent', response);
@@ -81,7 +80,7 @@ function MessagePage() {
     <div className='message-page-container'>
       <div className='send-message-container'>
         <h1>Send Message</h1>
-        <form className='form-container create-message-form' onSubmit={handleMessageSend}>
+        <div className='form-container create-message-form' onSubmit={handleMessageSend}>
           <div className='form-group'>
             <label htmlFor="content">Message Content:</label>
             <textarea
@@ -116,7 +115,7 @@ function MessagePage() {
             </select>
           </div>
           <button type="submit">Send Message</button>
-        </form>
+        </div>
       </div>
 
       <div className='update-message-container'>
