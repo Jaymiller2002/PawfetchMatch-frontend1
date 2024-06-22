@@ -72,7 +72,14 @@ function MessagePage() {
     }
 
     try {
-      const response = await updateMessage({ id: selectedMessage.id, content: updateContent, image: updateImage, auth });
+      const formData = new FormData();
+      formData.append('id', selectedMessage.id); // Adding the message ID
+      formData.append('content', updateContent);
+      if (updateImage) {
+        formData.append('image', updateImage);
+      }
+
+      const response = await updateMessage({ content: updateContent, image: updateImage, auth });
       console.log('Message updated:', response.data);
     } catch (error) {
       console.error('Error updating message:', error);
@@ -187,6 +194,7 @@ function MessagePage() {
 }
 
 export default MessagePage;
+
 
 
 
