@@ -11,17 +11,16 @@ function MessagePage() {
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
-  const [selectedMessage, setSelectedMessage] = useState(null);
   const [users] = useState([
     { id: 2, name: 'Jay Miller' },
     { id: 3, name: 'Jay Miller' },
     { id: 5, name: 'Morgan Miller' },
     { id: 6, name: 'Kailey Miller' },
     { id: 7, name: 'DeeAnn Miller' },
-    { id: 10, name: 'Jay Miller' },
-    { id: 11, name: 'Reece' },
-    { id: 14, name: 'Vader' },
-    { id: 15, name: 'Luke' },
+    { id: 10, name: 'Drew Stratton' },
+    { id: 11, name: 'user 11' },
+    { id: 14, name: 'user 14' },
+    { id: 15, name: 'user 15' },
     { id: 17, name: 'User 17' },
     { id: 18, name: 'User 18' },
     { id: 19, name: 'User 19' },
@@ -60,40 +59,30 @@ function MessagePage() {
     try {
       const response = await createMessage({ content, image, receiver, auth });
       console.log('Message sent:', response.data);
+      // Clear input fields after sending the message
+      setContent('');
+      setImage(null);
+      setReceiver('');
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
 
   const handleUpdateMessage = async () => {
-    if (!selectedMessage) {
-      console.error('No message selected for update');
-      return;
-    }
-
     try {
-      const formData = new FormData();
-      formData.append('id', selectedMessage.id); // Adding the message ID
-      formData.append('content', updateContent);
-      if (updateImage) {
-        formData.append('image', updateImage);
-      }
-
       const response = await updateMessage({ content: updateContent, image: updateImage, auth });
       console.log('Message updated:', response.data);
+      // Clear input fields after updating the message
+      setUpdateContent('');
+      setUpdateImage(null);
     } catch (error) {
       console.error('Error updating message:', error);
     }
   };
 
   const handleDeleteMessage = async () => {
-    if (!selectedMessage) {
-      console.error('No message selected for deletion');
-      return;
-    }
-
     try {
-      const response = await deleteMessage({ id: selectedMessage.id, auth });
+      const response = await deleteMessage({ auth });
       console.log('Message deleted:', response.data);
     } catch (error) {
       console.error('Error deleting message:', error);
@@ -163,24 +152,6 @@ function MessagePage() {
               onChange={(e) => setUpdateImage(e.target.files[0])}
             />
           </div>
-          <div className='form-group'>
-            <label htmlFor="selectedMessage">Select Message to Update:</label>
-            <select
-              id="selectedMessage"
-              value={selectedMessage ? selectedMessage.id : ''}
-              onChange={(e) => {
-                const selected = users.find(user => user.id === parseInt(e.target.value));
-                setSelectedMessage(selected);
-              }}
-            >
-              <option value="">Select Message</option>
-              {users.map(user => (
-                <option key={user.id} value={user.id}>
-                  {user.name} ({user.id})
-                </option>
-              ))}
-            </select>
-          </div>
           <button onClick={handleUpdateMessage}>Update Message</button>
         </div>
       </div>
@@ -194,7 +165,6 @@ function MessagePage() {
 }
 
 export default MessagePage;
-
 
 
 
