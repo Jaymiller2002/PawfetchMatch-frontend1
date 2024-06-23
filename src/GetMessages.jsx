@@ -43,7 +43,7 @@ function GetMessages() {
         <div key={message.id} className="message">
           <div className='message-sender'>Sender: {message.sender}</div>
           <div className='message-content'>Content: {message.content}</div>
-          <img src={`${baseUrl}${message.image}`} alt="Message Image" className='message-image'/>
+          {message.image ? <img src={`${baseUrl}${message.image}`} alt="Message Image" className='message-image'/> : null}
         </div>
       ))}
     </div>
