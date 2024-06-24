@@ -19,10 +19,6 @@
     background-color: #333;
     color: white;
   }
-
-  .card:hover {
-    box-shadow: 0px 0px 15px 5px rgba(60, 60, 60, 0.85);
-  }
   
   .card img {
     max-width: 100%;
