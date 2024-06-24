@@ -24,7 +24,7 @@ function Header() {
           <Link to="/ListingPage" className="header-link">Listing</Link>
           <Link to="/Profile" className="header-link">My Profile</Link>
           <Link to="/AllProfiles" className="header-link">All Profile's</Link>
-          <LogoutButton />
+          {auth.accessToken && <LogoutButton />}
         </div>
         <div className="burger-menu" onClick={toggleMenu}>
           <span></span>

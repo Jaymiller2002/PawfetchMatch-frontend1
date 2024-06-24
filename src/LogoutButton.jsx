@@ -19,6 +19,12 @@ const LogoutButton = () => {
     }
   };
 
+
+  // Only render the LogoutButton if the user is logged in
+  if (!auth.accessToken) {
+    return null;
+  }
+
   return (
     <div className='logout-button' onClick={handleLogout}>Logout</div>
   );
