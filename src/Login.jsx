@@ -25,6 +25,12 @@ function Login() {
     }
   }, [auth.accessToken, navigate]);
 
+
+  // If user is already authenticated, do not render the login form
+  if (auth.accessToken) {
+    return null;
+  }
+
   return (
     <div className="login-container">
       <h1>Login</h1>
