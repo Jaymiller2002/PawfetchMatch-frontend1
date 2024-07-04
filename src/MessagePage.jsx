@@ -11,6 +11,7 @@ function MessagePage() {
   const [receiver, setReceiver] = useState('');
   const [updateContent, setUpdateContent] = useState('');
   const [updateImage, setUpdateImage] = useState(null);
+  const [messageId, setMessageId] = useState(''); // Add state for message ID
   const [users] = useState([
     { id: 2, name: 'Jason Mize' },
     { id: 3, name: 'Jay Miller' },
@@ -70,11 +71,12 @@ function MessagePage() {
 
   const handleUpdateMessage = async () => {
     try {
-      const response = await updateMessage({ content: updateContent, image: updateImage, auth });
+      const response = await updateMessage({ id: messageId, content: updateContent, image: updateImage, auth });
       console.log('Message updated:', response.data);
       // Clear input fields after updating the message
       setUpdateContent('');
       setUpdateImage(null);
+      setMessageId(''); // Clear the message ID
     } catch (error) {
       console.error('Error updating message:', error);
     }
@@ -82,8 +84,9 @@ function MessagePage() {
 
   const handleDeleteMessage = async () => {
     try {
-      const response = await deleteMessage({ auth });
+      const response = await deleteMessage({ id: messageId, auth });
       console.log('Message deleted:', response.data);
+      setMessageId(''); // Clear the message ID
     } catch (error) {
       console.error('Error deleting message:', error);
     }
@@ -135,6 +138,15 @@ function MessagePage() {
         <h1>Update Message</h1>
         <div className='form-container update-message-form'>
           <div className='form-group'>
+            <label htmlFor="messageId">Message ID:</label>
+            <input
+              id="messageId"
+              value={messageId}
+              onChange={(e) => setMessageId(e.target.value)}
+              required
+            />
+          </div>
+          <div className='form-group'>
             <label htmlFor="updateContent">Update Content:</label>
             <textarea
               id="updateContent"
@@ -159,7 +171,21 @@ function MessagePage() {
       <div>
         <GetMessages />
       </div>
-      <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
+      <div className='delete-message-container'>
+        <h1>Delete Message</h1>
+        <div className='form-container delete-message-form'>
+          <div className='form-group'>
+            <label htmlFor="deleteMessageId">Message ID:</label>
+            <input
+              id="deleteMessageId"
+              value={messageId}
+              onChange={(e) => setMessageId(e.target.value)}
+              required
+            />
+          </div>
+          <button className='delete-button' onClick={handleDeleteMessage}>Delete Message</button>
+        </div>
+      </div>
     </div>
   );
 }

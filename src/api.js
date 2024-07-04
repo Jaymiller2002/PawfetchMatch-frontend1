@@ -194,10 +194,10 @@ export const updateListing = ({ title, description, price, quantity, image, auth
 };
 
 // Delete Listing API
-export const deleteListing = ({ auth }) => {
+export const deleteListing = ({ id, auth }) => {
   return axios({
     method: 'delete',
-    url: `${baseUrl}/delete-listing/`, // Assuming the endpoint is 'delete-listing'
+    url: `${baseUrl}/delete-listing/${id}`, // Assuming the endpoint is 'delete-listing'
     headers: {
       Authorization: `Bearer ${auth.accessToken}`,
     },
@@ -208,7 +208,7 @@ export const deleteListing = ({ auth }) => {
   })
   .catch(error => {
     console.error("Error deleting listing:", error);
-    throw error;
+    throw error ;
   });
 };
 
@@ -249,14 +249,14 @@ export const createMessage = ({ sender, receiver, content, image, auth}) => {
 }
 
 // Update Message API
-export const updateMessage = ({ content, image, auth }) => {
+export const updateMessage = ({ id, content, image, auth }) => {
   const formData = new FormData();
   formData.append('content', content);
   formData.append('image', image); // Assuming 'image' is a file or blob
 
   return axios({
     method: 'put',
-    url: `${baseUrl}/update-message/`, // Assuming the endpoint is 'update-message'
+    url: `${baseUrl}/update-message/${id}`, // Assuming the endpoint is 'update-message'
     headers: {
       Authorization: `Bearer ${auth.accessToken}`,
       'Content-Type': 'multipart/form-data'
@@ -274,10 +274,10 @@ export const updateMessage = ({ content, image, auth }) => {
 };
 
 // Delete Message API
-export const deleteMessage = ({ auth }) => {
+export const deleteMessage = ({ id, auth }) => {
   return axios({
     method: 'delete',
-    url: `${baseUrl}/delete-message/`, // Assuming the endpoint is 'delete-message'
+    url: `${baseUrl}/delete-message/${id}`, // Assuming the endpoint is 'delete-message'
     headers: {
       Authorization: `Bearer ${auth.accessToken}`,
     },
